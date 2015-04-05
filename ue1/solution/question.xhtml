@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title xml:lang="en">Jeopardy!</title>
+		<link rel="stylesheet" href="styles/style.css" type="text/css" />
+		<script language="javascript" type="text/javascript" src="js/framework.js"></script>
+		<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="js/validate.js"></script>
+		<script type="text/javascript">
+		//<![CDATA[
+		$(document).ready(function(e) {
+			if(hasFormValidation()=='noValidate'){
+				alert('No validation possible!');
+				return;
+			} else{
+				validate();
+				$('#username,#password,#birthdate').keyup(validate);
+				$('#username,#password,#birthdate').on("blur",function(){raiseErrorMessage(this)});
+			}
+		});
+		//]]>
+		</script>
+	</head>
+	<body>
+		<header role="banner">
+			<img src="img/big-logo-small.png" id="logo_small" alt="Logo for Jeopardy" style="vertical-align:middle"/>
+			<label id="jeopardy">Jeopardy!</label>
+			<input type="button" value="Abmelden" id="login_btn" />
+		</header>
+		<div id="questionContainer">
+			<section class="profiles">
+				<aside>
+					<img src="img/avatar/black-widow_head.png"/>
+					<p>
+						Fragen 2/10
+					</p>
+				</aside>
+			</section>
+			<section class="evaluation">
+				<div class="rightInfo">Du hast richtig geantwortet: +1000 &euro;</div>
+				<div class="wrongInfo">Deadpool hat falsch geantwortet: -500 &euro;</div>
+				<div class="choiceInfo">Deadpool hat TUWIEN f&uuml;r &euro; 1000 gew&auml;hlt.</div>
+			</section>
+			<section class="table_values">
+				<div class="table">
+					<div class="questionHeader">
+						<div class="cell_option">TV</div>
+						<div class="cell_option">SSD</div>
+						<div class="cell_option">Web</div>
+						<div class="cell_option">Sport</div>
+						<div class="cell_option">TUWIEN</div>
+					</div>
+					<div class="row">
+						<div class="selectedQuestion">&euro; 100</div>
+						<div class="question">&euro; 100</div>
+						<div class="question">&euro; 100</div>
+						<div class="question">&euro; 100</div>
+						<div class="question">&euro; 100</div>
+					</div>
+					<div class="row">
+						<div class="question">&euro; 200</div>
+						<div class="question">&euro; 200</div>
+						<div class="question">&euro; 200</div>
+						<div class="selectedQuestion">&euro; 200</div>
+						<div class="question">&euro; 200</div>
+					</div>
+					<div class="row">
+						<div class="question">&euro; 500</div>
+						<div class="question">&euro; 500</div>
+						<div class="selectedQuestion">&euro; 500</div>
+						<div class="question">&euro; 500</div>
+						<div class="question">&euro; 500</div>
+					</div>
+					<div class="row">
+						<div class="question">&euro; 750</div>
+						<div class="question">&euro; 750</div>
+						<div class="question">&euro; 750</div>
+						<div class="question">&euro; 750</div>
+						<div class="question">&euro; 750</div>
+					</div>
+					<div class="row">
+						<div class="cell"></div>
+						<div class="question">&euro; 1000</div>
+						<div class="question">&euro; 1000</div>
+						<div class="cell"></div>
+						<div class="selectedQuestion">&euro; 1000</div>
+					</div>
+				</div>
+				<input type="button" class="submitQuestion" value="w&auml;hlen" ></input>
+				<div class="lastgame">Letztes Spiel: 22.2.2015 11:07:00</div>
+			</section>
+		</div>
+		<footer>
+			&copy; 2015 BIG Jeopardy
+		</footer>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta name="Sebastian Kirchner" content="WE"/>
+		<title xml:lang="en">Jeopardy!</title>
+		<link rel="stylesheet" href="styles/style.css" type="text/css"/>
+		<script language="javascript" type="text/javascript" src="js/framework.js"></script>
+		<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="js/validate.js"></script>
+		
+		<script type="text/javascript">
+			//<![CDATA[
+			$(document).ready(function(e) {
+				if(hasFormValidation()=='noValidate'){
+					alert('No validation possible!');
+					return;
+				} else{
+					validate();
+					$('#username,#password,#birthday').keyup(validate);
+					$('#username,#password,#birthday').on("blur",function(){raiseErrorMessage(this)});
+				}
+			});
+			function validate(){
+				/*
+				Wenn Username oder Passwort kleiner als 0 oder Geburtsdatum befüllt und Regex passt nicht
+				*/
+				var isValid =  validateUsername() || validatePassword() || validatebirthday();
+				$('input[type=submit]').prop("disabled", isValid);
+			}
+
+			function raiseErrorMessage(selector){
+				if(selector.id == 'birthday'){
+					if(validatebirthday()){
+						$('#birthdayError').remove();
+						$(selector).after('<div id="birthdayError" class="error">Format muss DD.MM.JJJJ sein!</div>');
+					} else {
+						$('#birthdayError').remove();
+					}
+				}
+				
+				if(selector.id == 'username'){
+					if(validateUsername()){
+						$('#usernameError').remove();
+						$(selector).after('<div id="usernameError" class="error">Username muss zwischen 4 und 8 Zeichen lang sein!</div>');
+					} else {
+						$('#usernameError').remove();
+					}
+				}
+				
+				if(selector.id == 'password'){
+					if(validatePassword()){
+						$('#passwordError').remove();
+						$(selector).after('<div id="passwordError" class="error">Passwort muss zwischen 4 und 8 Zeichen lang sein!</div>');
+					} else {
+						$('#passwordError').remove();
+					}
+				}
+				
+				
+			}
+
+			function validateUsername(){
+
+				return $('#username').val().length < 4
+				
+			}
+
+			function validatePassword(){
+
+				return $('#password').val().length < 4
+				
+			}
+
+			function validatebirthday(){
+				
+				return ($('#birthday').val().length>0 && !/^([0]?[1-9]|[1|2][0-9]|[3][0|1])[.]([0]?[1-9]|[1][0-2])[.]([0-9]{4})$/.test(getNormalizedDateString($('#birthday'))))
+				
+			}
+			//]]>
+		</script>
+
+	</head>
+	<body>
+		<header role="banner">
+			<img src="img/big-logo-small.png" id="logo_small" alt="Logo for Jeopardy" style="vertical-align:middle"/>
+			<label id="jeopardy">Jeopardy!</label>
+			<input type="button" value="Anmelden" id="login_btn" />
+		</header>
+		<div class="container">
+			<article>
+				<form noValidate="novalidate">
+					<fieldset>
+						<legend>Pers&ouml;nliche Daten</legend>
+						<p>
+							<label for="first_name">Vorname: </label>
+							<input type="text" id="first_name" name="first_name"/>
+						</p>
+						<p>
+							<label for="last_name">Nachname: </label>
+							<input type="text" id="last_name" name="last_name"/>
+						</p>
+						<p>
+							<label for="birthday">Geburtstag: </label>
+							<input type="date" id="birthday" name="birthday"/>
+						</p>
+						<p>
+							<label for="sex">Geschlecht:</label>
+							<div id="sex_container">
+								<label for="male">M&auml;nnlich</label>
+								<input id="male" type="radio" name="gender" label="male"/>
+								<label for="female">Weiblich</label>
+								<input id="female" type="radio" name="gender" label="female"/>
+							</div>
+						</p>
+					</fieldset>
+				</form>
+			
+				<form>
+					<fieldset>
+						<legend>Spielerdaten</legend>
+						<p>
+							<label for="avatar">Avatar:</label>
+							<select name="referrer" id="avatar" class="dropdown">
+								<option value="first">Aldrich Killian</option>
+								<option value="second">Maxime Musterfrau</option>
+								<option value="third">John Doe</option>
+							</select>
+						</p>
+						<p>
+							<label>Benutzername*: <input type="text" name="user" id="username" maxlength="8"/></label>
+						</p>
+						<p>
+							<label>Passwort*: <input type="password" name="password" id="password" maxlength="8"/></label>
+						</p>
+						<p>
+							<input type="submit" id="register_btn" value="Registrieren" disabled="disabled"/>
+						</p>
+					</fieldset>
+				</form>
+				<p id="info">Mit "*" gekennzeichnete Felder sind Pflichtfelder</p>
+			</article>
+		</div>
+		<footer>
+			&copy; 2015 BIG Jeopardy
+		</footer>
+	</body>
+</html>

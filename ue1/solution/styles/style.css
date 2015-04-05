@@ -1,0 +1,354 @@
+@charset "utf-8";
+
+/*CSS Document for exercise 1
+Group:
+- David Tichy
+- Markus Kurzmann
+- J. Sebastian Kirchner
+*/
+/***************/
+/* GENERAL CSS */
+html {
+	font-family: Verdana, sans-serif;
+	font-size: 0.95em;
+	min-width: 460px;
+}
+
+body {
+	background: -webkit-linear-gradient(#fbfbfd, #d3d8e8);
+	background: -o-linear-gradient(#fbfbfd, #d3d8e8); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#fbfbfd, #d3d8e8); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#fbfbfd, #d3d8e8); /* Standard syntax */
+	margin:0px;
+}
+
+header {
+	min-height: 2em;
+	color: white;
+	background-color: #2f4b86;
+	font-size: 1.5em;
+	margin: 0px;
+	padding: 0.3em;
+}
+
+footer{
+	text-align: center;
+	margin-bottom: 10em;
+}
+
+/***************/
+/* BANNER */
+#login_btn{
+	float: right;
+	background-color: #f27300;
+	border-color: #784600;
+	border-style: solid;
+	font-family: inherit;
+	color: inherit;
+	margin-top: 0.65em;
+	margin-right: 0.5em;
+	padding: 0.4em;
+	border-radius: 0.15em;
+	min-width: 9em;
+}
+
+#jeopardy {
+	margin: 0.3em;
+	margin-bottom: 2em;
+}
+
+/***************/
+/* CONTAINER */
+article {
+	min-width: inherit;
+	max-width: 30em;
+	margin: 3em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/***************/
+/* FORM CSS */
+form {
+	width: 100%;
+}
+
+legend {
+	color: #006bac;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: left;
+	padding: 0px;
+}
+
+fieldset {
+	border-style: hidden;
+}
+
+fieldset input[type="text"], fieldset input[type="password"], fieldset input[type="date"], select { 
+	float: right;
+	min-width: 15em;
+	max-width: 100%;
+	height: 2em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #2f4b86;
+	border-radius: 0.3em;
+}
+
+select {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 0.16em;
+    text-overflow: '';
+	font-size: 0.89em;
+}
+
+label {
+	margin: 0px;
+	min-width: 5em;
+	max-width: 100%;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+	margin-top: 1.4em;
+	margin-bottom: 1.4em;
+	border-style: solid;
+	border-color: transparent;
+}
+
+#sex_container {
+	float: right;
+	height: 1.5em;
+}
+
+/* register button */
+input[type=submit]{
+	float: right;
+	background-color: #fa7700;
+	border-color: black;
+	border-style: solid;
+	border-width: thin;
+	font-family: inherit;
+	color: white;
+	margin-top: 2em;
+	padding: 0.4em;
+	border-radius: 0.3em;
+	min-width: 9em;
+}
+
+input[type=submit]:disabled{
+	background-color:#cccccc;
+	color:#ffffff;
+}
+
+/* invalid input error */
+div[class=error]{
+	display:inline-block;
+	color:#F00;	
+	font-size:0.8em;
+	float:right;
+}
+
+#info {
+	text-align: center;
+}
+
+/*****************************/
+/****** Question Page ********/
+/*****************************/
+#questionContainer{
+	margin:auto;
+	padding:0.5em;
+}
+
+.wrongInfo{
+	border-color:#E60808;
+	color:#E60808;
+}
+
+.rightInfo{
+	border-color:#029902;
+	color:#029902;
+}
+
+.choiceInfo{
+	color:#5C5F63;
+}
+
+.wrongInfo,.rightInfo,.choiceInfo{
+	border:solid;
+	border-width:thin;
+	margin-top:0.5em;
+	margin-left:auto;
+	margin-right:auto;
+	width:30em;
+	text-align:center;
+	font-size:1.2em;
+	padding-top:0.18em;
+	padding-bottom:0.18em;
+}
+
+/*Css für Question Table*/
+.table{
+	display:table;
+	border-spacing: 0.3em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:1.5em;
+}
+
+.cell, .cell_option, .selectedQuestion,.question{
+	display:table-cell;
+	min-width:8em;
+	max-width:8em;
+	height:2.5em;
+}
+
+.cell_option {
+	background-color: #f27300;
+}
+
+.row,.questionHeader{
+	display:table-row;
+}
+
+.questionHeader div{
+	background: -moz-linear-gradient(top, #FB7700, #F37300);
+	font-weight:bold;
+	color:#173B26;
+}
+
+.selectedQuestion,.question,.questionHeader div{
+	border:solid;
+	border-width:thin;
+	padding-left:0.5em;
+	padding-right:0.5em;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.selectedQuestion{
+	background-color:#D3D8E3;
+	border-color:#5C5F63;
+	color:#929396;
+}
+
+.question{
+	background-color:#334f8b;
+	border-color:#000;	
+	color:#FFF;
+}
+
+.submitQuestion{
+	min-width:9em;
+	min-height: 2.5em;
+	background: #33cf41;
+	color:#FFF;
+	font-weight:bold;
+	margin-top:1em;
+	margin-bottom:1em;
+	float:right;
+	border-style: solid;
+	border-width: thin;
+	border-color:#116d01;
+	border-radius: 0.3em;
+	margin-top: 1.5em;
+	padding: 0.4em;
+}
+
+.lastgame{
+	clear: both;
+	font-size:0.75em;
+}
+
+/*****************************/
+/* Responsiveness via @media */
+
+/* SMALL SCREEN */
+@media screen and (max-width:500px){
+	body{
+		font-size:0.9em;
+	}
+	
+	header, footer, label {
+		min-width: 100%;
+	}
+	
+	fieldset input[type="text"], fieldset input[type="password"], fieldset input[type="date"], select { 
+		min-width: 100%;
+		height: 2em;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #2f4b86;
+		border-radius: 0.3em;
+	}
+	
+	article{
+		min-width:100%;
+		margin:3 auto;	
+	}
+
+	input[type=submit]{
+		width:100%;
+		-webkit-border-radius:0.25em;
+		border-radius:0.25em;
+	}
+	
+	#sex_container {
+		min-width: 100%;
+	}
+	
+	p {
+	margin-top: 2.5em;
+	margin-bottom: 2.5em;
+}
+	
+	select{
+		min-width:100%;
+		-webkit-border-radius:0.25em;
+		border-radius:0.25em;
+	}	
+}
+
+/* MEDIUM SCREEN */
+@media screen and (min-width:500px) and (max-width:750px) {
+	#questionContainer{
+		min-width:500px;
+		max-width: 100%;
+	}
+	
+	.profiles {
+		float: center;
+	}
+	
+	.evaluation{
+		float: center;
+	}
+	
+	.table_values{
+		float: center;
+	}
+}
+
+/* BIG SCREEN */
+@media screen and (min-width:750px) {
+	#questionContainer{
+		min-width: 750px;
+		max-width: 1600px;
+	}
+	
+	.profiles {
+		float: right;
+	}
+	
+	.evaluation{
+		float: center;
+	}
+	
+	.table_values{
+		float: center;
+	}
+}
