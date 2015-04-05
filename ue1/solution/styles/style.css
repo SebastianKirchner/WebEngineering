@@ -286,6 +286,11 @@ div[class=error]{
 	margin-right: auto;
 }
 
+#player_avatar{
+	max-width: 107px;
+	max-height:107px;
+}
+
 /*****************************/
 /* Responsiveness via @media */
 
