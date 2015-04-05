@@ -164,6 +164,22 @@ div[class=error]{
 	padding:0.5em;
 }
 
+.profiles{
+	border-style: solid;
+	border-color: transparent;
+	margin-bottom: 5em;
+}
+
+.evaluation{
+	border-style: solid;
+	border-color: transparent;
+}
+
+.table_values{
+	border-style: solid;
+	border-color: transparent;
+}
+
 .wrongInfo{
 	border-color:#E60808;
 	color:#E60808;
@@ -264,6 +280,12 @@ div[class=error]{
 	font-size:0.75em;
 }
 
+#nr_of_questions{
+	float: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*****************************/
 /* Responsiveness via @media */
 
@@ -304,13 +326,34 @@ div[class=error]{
 	p {
 	margin-top: 2.5em;
 	margin-bottom: 2.5em;
-}
+	}
 	
 	select{
 		min-width:100%;
 		-webkit-border-radius:0.25em;
 		border-radius:0.25em;
 	}	
+	
+	.profiles{
+		width: 100%;
+	}
+	
+	.evaluation{
+		width: 100%;
+	}
+	
+	.table_values{
+		width: 100%;
+	}
+	
+	#player_avatar{
+		float: left;
+	}
+	
+	#computer_avatar{
+		float: right;
+	}
+	
 }
 
 /* MEDIUM SCREEN */
@@ -322,14 +365,25 @@ div[class=error]{
 	
 	.profiles {
 		float: center;
+		width: 100%;
 	}
 	
 	.evaluation{
 		float: center;
+		width: 100%;
 	}
 	
 	.table_values{
 		float: center;
+		width: 100%;
+	}
+	
+	#player_avatar{
+		float: left;
+	}
+	
+	#computer_avatar{
+		float: right;
 	}
 }
 
@@ -346,9 +400,11 @@ div[class=error]{
 	
 	.evaluation{
 		float: center;
+		width: 80%;
 	}
 	
 	.table_values{
 		float: center;
+		width: 80%;
 	}
 }
