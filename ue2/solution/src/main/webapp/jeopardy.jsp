@@ -69,7 +69,7 @@
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
             <p class="user-info">Deadpool hat TUWIEN für € 1000 gewählt.</p>
-            <form id="questionform" action="question.xhtml" method="post">
+            <form id="questionform" action="question.jsp" method="post">
                <fieldset>
                <legend class="accessibility">Fragenauswahl</legend>
                <section class="questioncategory" aria-labelledby="tvheading">

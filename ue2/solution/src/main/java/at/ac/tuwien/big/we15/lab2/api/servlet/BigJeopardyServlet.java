@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by David on 20.04.2015.
  */
-@WebServlet(name="Jeopardy", urlPatterns = {"/"})
+@WebServlet(name="Jeopardy", urlPatterns = {"/jeopardy.jsp"})
 public class BigJeopardyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getParameter("username");
