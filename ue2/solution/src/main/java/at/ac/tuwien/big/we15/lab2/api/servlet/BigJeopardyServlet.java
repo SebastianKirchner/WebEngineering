@@ -10,10 +10,12 @@ import java.io.IOException;
 /**
  * Created by David on 20.04.2015.
  */
-@WebServlet(name="Jeopardy", urlPatterns = {"/jeopardy.jsp"})
+@WebServlet(name="Jeopardy", urlPatterns = {"/jeopardy"})
 public class BigJeopardyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter("username");
+        String name = request.getParameter("username");
+        request.getSession().setAttribute("username",name);
+        request.getRequestDispatcher("/jeopardy.jsp").include(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
