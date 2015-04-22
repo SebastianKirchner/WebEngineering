@@ -1,5 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
+<% int questionID = (Integer) session.getAttribute("question_selection"); %>
+<% Question question = new SimpleQuestion();%>
+<% List<Category> categories = (List<Category>) session.getAttribute("categoriesQuestions");%>
+<% for (Category c : categories) {
+    for (Question q : c.getQuestions()) {
+        if (q.getId() == questionID) {
+            question = q;
+        }
+    }
+}
+List<Answer> answers = question.getAllAnswers();%>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -38,11 +55,11 @@
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow (Du)</td>
+                     <td class="playername"><%=session.getAttribute("username")%> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 €</td>
+                     <td class="playerpoints"><%=session.getAttribute("playerpoints")%> €</td>
                   </tr>
                </table>
             </section>
@@ -67,13 +84,13 @@
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="jeopardy.jsp" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>
-               <p id="questiontype">TUWIEN für € 300</p>
-               <p id="questiontext">Diese Lehrveranstaltungen bilden das Modul EWA.</p>
+               <p id="questiontype"><%= question.getCategory().getName()%> für € <%=question.getValue()%></p>
+               <p id="questiontext"><%= question.getText()%></p>
                <ul id="answers">
-                  <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1">Was ist IT Strategie?</label></li>
-                  <li><input name="answers" id="answer_2" value="2" type="checkbox"/><label class="tile clickable" for="answer_2">Was ist Web Engineering?</label></li>
-                  <li><input name="answers" id="answer_3" value="3" type="checkbox"/><label class="tile clickable" for="answer_3">Was ist Semistrukturierte Daten?</label></li>
-                  <li><input name="answers" id="answer_4" value="4" type="checkbox"/><label class="tile clickable" for="answer_4">Was ist Objektorientierte Modellierung?</label></li>
+                  <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1"><%=answers.get(0).getText()%></label></li>
+                  <li><input name="answers" id="answer_2" value="2" type="checkbox"/><label class="tile clickable" for="answer_2"><%=answers.get(1).getText()%></label></li>
+                  <li><input name="answers" id="answer_3" value="3" type="checkbox"/><label class="tile clickable" for="answer_3"><%=answers.get(2).getText()%></label></li>
+                  <li><input name="answers" id="answer_4" value="4" type="checkbox"/><label class="tile clickable" for="answer_4"><%=answers.get(3).getText()%></label></li>
                </ul>
                <input id="timeleftvalue" type="hidden" value="100"/>
                <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>

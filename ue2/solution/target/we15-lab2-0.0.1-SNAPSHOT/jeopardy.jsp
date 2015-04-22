@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
@@ -76,7 +76,7 @@
                   <h3 id="tvheading" class="tile category-title"><span class="accessibility">Kategorie: </span>TV</h3>
                   <ol class="category_questions">
                      <li><input name="question_selection" id="question_1" value="1" type="radio" disabled="disabled" /><label class="tile clickable" for="question_1">€ 100</label></li>
-                     <li><input name="question_selection" id="question_2" value="2" type="radio"/><label class="tile clickable" for="question_2">€ 200</label></li>
+                     <li><input name="question_selection" id="question_2" value="2" type="radio"/><label class="tile clickable" for="question_2"><% session.setAttribute("question_selection", 2); %>€ 200</label></li>
                      <li><input name="question_selection" id="question_3" value="3" type="radio"/><label class="tile clickable" for="question_3">€ 500</label></li>
                      <li><input name="question_selection" id="question_4" value="4" type="radio"/><label class="tile clickable" for="question_4">€ 750</label></li>
                   </ol>
