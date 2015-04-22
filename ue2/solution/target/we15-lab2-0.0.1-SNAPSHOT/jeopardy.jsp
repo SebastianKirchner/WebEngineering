@@ -42,7 +42,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">2000 €</td>
+                     <td class="playerpoints"><%= session.getAttribute("playerpoints")%></td>
                   </tr>
                </table>
             </section>
