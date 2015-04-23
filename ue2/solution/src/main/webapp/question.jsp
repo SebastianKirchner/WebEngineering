@@ -4,19 +4,11 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<% int questionID = (Integer) session.getAttribute("question_selection"); %>
-<% Question question = new SimpleQuestion();%>
-<% List<Category> categories = (List<Category>) session.getAttribute("categoriesQuestions");%>
-<% for (Category c : categories) {
-    for (Question q : c.getQuestions()) {
-        if (q.getId() == questionID) {
-            question = q;
-        }
-    }
-}
-List<Answer> answers = question.getAllAnswers();%>
+<% Game game = (Game) session.getAttribute("game"); %>
+<% Question question = game.questionById(Integer.parseInt(request.getParameter("question_selection")));%>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -51,33 +43,33 @@ List<Answer> answers = question.getAllAnswers();%>
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-               <img class="avatar" src="img/avatar/black-widow_head.png" alt="Spieler-Avatar Black Widow" />
+               <img class="avatar" src="img/avatar/<%=game.getPlayer().getImageHead()%>" alt="Spieler-Avatar <%=game.getPlayer().getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"><%=session.getAttribute("username")%> (Du)</td>
+                     <td class="playername"><%=game.getPlayer().getName()%> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"><%=session.getAttribute("playerpoints")%> €</td>
+                     <td class="playerpoints"><%=game.getPlayerPoints()%> €</td>
                   </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+               <img class="avatar" src="img/avatar/<%=game.getBot().getImageHead()%>" alt="Spieler-Avatar <%=game.getBot().getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%=game.getBot().getName()%></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">400 €</td>
+                     <td class="playerpoints"><%=game.getBotPoints()%> €</td>
                   </tr>
                </table>
             </section>
-            <p id="round">Frage: 3 / 10</p>
+            <p id="round">Frage: <%=game.getCurrentRound()%> / 10</p>
          </section>
             
       <!-- Question -->
@@ -87,12 +79,12 @@ List<Answer> answers = question.getAllAnswers();%>
                <p id="questiontype"><%= question.getCategory().getName()%> für € <%=question.getValue()%></p>
                <p id="questiontext"><%= question.getText()%></p>
                <ul id="answers">
-                  <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1"><%=answers.get(0).getText()%></label></li>
-                  <li><input name="answers" id="answer_2" value="2" type="checkbox"/><label class="tile clickable" for="answer_2"><%=answers.get(1).getText()%></label></li>
-                  <li><input name="answers" id="answer_3" value="3" type="checkbox"/><label class="tile clickable" for="answer_3"><%=answers.get(2).getText()%></label></li>
-                  <li><input name="answers" id="answer_4" value="4" type="checkbox"/><label class="tile clickable" for="answer_4"><%=answers.get(3).getText()%></label></li>
+                   <% for(Answer a : question.getAllAnswers()){%>
+                  <li><input name="answers" id="<%="answer_"+a.getId()%>" value="<%=a.getId()%>" type="checkbox"/><label class="tile clickable" for="<%="answer_"+a.getId()%>"><%=a.getText()%></label></li>
+                   <%}%>
                </ul>
                <input id="timeleftvalue" type="hidden" value="100"/>
+                <input name="questionId" type="hidden" value="<%=question.getId()%>">
                <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>
             </form>
          </section>

@@ -1,6 +1,8 @@
-package at.ac.tuwien.big.we15.lab2.api.servlet;
+package at.ac.tuwien.big.we15.lab2.servlet;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import at.ac.tuwien.big.we15.lab2.api.Category;
+import at.ac.tuwien.big.we15.lab2.api.Game;
 import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
 import at.ac.tuwien.big.we15.lab2.api.impl.ServletJeopardyFactory;
 
@@ -27,7 +29,7 @@ public class BigJeopardyServlet extends HttpServlet {
         ServletJeopardyFactory factory = new ServletJeopardyFactory(servletContext);
         QuestionDataProvider provider = factory.createQuestionDataProvider();
         List<Category> categories = provider.getCategoryData();
-        request.getSession().setAttribute("categoriesQuestions",categories);
+        request.getSession().setAttribute("game",new Game(Avatar.BEETLE, categories));
 
         request.getRequestDispatcher("/jeopardy.jsp").include(request, response);
     }
