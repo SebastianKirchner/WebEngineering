@@ -6,7 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<% int questionID = (Integer) session.getAttribute("question_selection"); %>
+<% int questionID = Integer.parseInt(request.getParameter("question_selection")); %>
 <% Question question = new SimpleQuestion();%>
 <% List<Category> categories = (List<Category>) session.getAttribute("categoriesQuestions");%>
 <% for (Category c : categories) {
@@ -87,12 +87,12 @@ List<Answer> answers = question.getAllAnswers();%>
                <p id="questiontype"><%= question.getCategory().getName()%> für € <%=question.getValue()%></p>
                <p id="questiontext"><%= question.getText()%></p>
                <ul id="answers">
-                  <li><input name="answers" id="answer_1" value="1" type="checkbox"/><label class="tile clickable" for="answer_1"><%=answers.get(0).getText()%></label></li>
-                  <li><input name="answers" id="answer_2" value="2" type="checkbox"/><label class="tile clickable" for="answer_2"><%=answers.get(1).getText()%></label></li>
-                  <li><input name="answers" id="answer_3" value="3" type="checkbox"/><label class="tile clickable" for="answer_3"><%=answers.get(2).getText()%></label></li>
-                  <li><input name="answers" id="answer_4" value="4" type="checkbox"/><label class="tile clickable" for="answer_4"><%=answers.get(3).getText()%></label></li>
+                   <% for(Answer a : answers){%>
+                  <li><input name="answers" id="<%="answer_"+a.getId()%>" value="<%=a.getId()%>" type="checkbox"/><label class="tile clickable" for="<%="answer_"+a.getId()%>"><%=a.getText()%></label></li>
+                   <%}%>
                </ul>
                <input id="timeleftvalue" type="hidden" value="100"/>
+                <input name="questionId" type="hidden" value="<%=question.getId()%>">
                <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>
             </form>
          </section>
