@@ -8,10 +8,20 @@
 <% Game game = (Game) request.getSession().getAttribute("game"); %>
 <% boolean correct = false, answered = false;
     //Code wird ausgeführt, wenn auf eine Frage geantwortet wird
-    if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-        correct = game.isAnsweredCorrectly(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
-        answered = true;
-        game.evaluateRound(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
+    if (game.isPlayerInLead()) {
+        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
+            answered = true;
+            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
+            game.botMove();
+            if (!game.isPlayerInLead()) {  response.setIntHeader("Refresh", 0);; }
+        }
+    } else if (!game.isPlayerInLead() && !game.isRoundFinished()){
+        game.botMove();
+        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
+            answered = true;
+            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
+        }
+
     }
 %>
 <!DOCTYPE html>
@@ -81,15 +91,15 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-             <%if(correct && answered){%>
+             <%if(game.isPlayerCorrect() && answered){%>
             <p class="user-info positive-change">Du hast richtig geantwortet: +<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
-             <%} else if (!correct && answered) {%>
+             <%} else if (!game.isPlayerCorrect() && answered) {%>
              <p class="user-info negative-change">Du hast falsch geantwortet: -<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
              <%}%>
-             <%if(game.getBotRight() && game.botAnswered()){%>
+             <%if(game.isBotCorrect() && game.botAnswered()){%>
              <p class="user-info positive-change"><%=game.getBot().getName()%> hat richtig geantwortet: +<%=game.getBotQuestion().getValue()%> €</p>
              <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
-             <%} else if (!game.getBotRight() && game.botAnswered()) {%>
+             <%} else if (!game.isBotCorrect() && game.botAnswered()) {%>
              <p class="user-info negative-change"><%=game.getBot().getName()%> hat falsch geantwortet: -<%=game.getBotQuestion().getValue()%> €</p>
              <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
              <%}%>
