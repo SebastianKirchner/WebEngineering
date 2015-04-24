@@ -21,17 +21,13 @@ import java.util.List;
 @WebServlet(name="Jeopardy", urlPatterns = {"/jeopardy"})
 public class BigJeopardyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("username");
-        request.getSession().setAttribute("username",name);
-        request.getSession().setAttribute("playerpoints",0);
-
         ServletContext servletContext = getServletContext();
         ServletJeopardyFactory factory = new ServletJeopardyFactory(servletContext);
         QuestionDataProvider provider = factory.createQuestionDataProvider();
         List<Category> categories = provider.getCategoryData();
-        request.getSession().setAttribute("game",new Game(Avatar.BEETLE, categories));
+        request.getSession().setAttribute("game",new Game(Avatar.getRandomAvatar(), categories));
 
-        request.getRequestDispatcher("/jeopardy.jsp").include(request, response);
+        request.getRequestDispatcher("/jeopardy.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

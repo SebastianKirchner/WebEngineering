@@ -13,7 +13,7 @@ public class Game {
 
     private Avatar bot, player, first;
 
-    private Question bot_question;
+    private Question bot_question, player_question;
 
     private boolean player_done, bot_done, player_correct, bot_correct, bot_answered, player_lead;
 
@@ -25,7 +25,7 @@ public class Game {
     public Game(Avatar player, List<Category> categories) {
         this.player = player;
         this.bot = Avatar.getOpponent(this.player);
-        this.current_round = 1;
+        this.current_round = 0;
         this.categories = categories;
         this.first = this.player;
         this.answered = new ArrayList<>();
@@ -48,8 +48,10 @@ public class Game {
      */
     public boolean simulateRound(String questionID, String[] values) {
 
+        boolean toReturn = true;
+
         // necessary to prevent exception
-        if (current_round == 1 && questionID == null) {
+        if (current_round == 0 && questionID == null) {
             return true;
         }
 
@@ -57,24 +59,30 @@ public class Game {
             if (this.player_lead) {
                 playerMove(Integer.parseInt(questionID), values);
                 botMove();
-                return player_points >= bot_points ? true : false;
+                toReturn =  player_points >= bot_points ? true : false;
             } else {
                 botMove();
-                return false;
+                toReturn = false;
             }
         } else {
             if (player_done) {
                 botMove();
-                return true;
+                toReturn = true;
             } else {
                 if (!wasAnswered(Integer.parseInt(questionID))) {
                     playerMove(Integer.parseInt(questionID), values);
-                    return player_points >= bot_points ? true : false;
+                    toReturn = player_points >= bot_points ? true : false;
                 } else {
-                    return true;
+                    toReturn = true;
                 }
             }
         }
+
+        if (this.player_done && this.bot_done) {
+            this.current_round++;
+        }
+
+        return toReturn;
     }
 
     /**
@@ -85,11 +93,11 @@ public class Game {
      */
     public void playerMove(int questionID, String[] values) {
         Question question = questionById(questionID);
+        this.player_question = question;
         this.player_correct = isAnsweredCorrectly(questionID, values);
         setPoints(this.player_correct ? question.getValue() : -question.getValue(), this.player.getId());
         removeQuestion(questionID);
         this.player_done = true;
-        //checkRound();
     }
 
     /**
@@ -103,7 +111,6 @@ public class Game {
         removeQuestion(question.getId());
         this.bot_done = true;
         this.bot_answered = true;
-        //checkRound();
     }
 
     /**
@@ -205,6 +212,12 @@ public class Game {
         return this.current_round;
     }
 
+    public void checkRoundNumber() {
+        if (this.player_done && this.bot_done) {
+            ++this.current_round;
+        }
+    }
+
     /**
      *
      * @param id id of the question
@@ -245,6 +258,8 @@ public class Game {
     public boolean isNewRound() {
         return !this.player_done && !this.bot_done;
     }
+
+    public Question getPlayerQuestion() {  return this.player_question; }
 
     /**
      *
@@ -288,7 +303,7 @@ public class Game {
             this.player_done = false;
             this.bot_done = false;
             this.player_lead = this.player_points >= this.bot_points;
-            this.current_round++;
+            //this.current_round++;
         }
     }
 

@@ -1,16 +1,22 @@
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<% Game game = (Game) request.getSession().getAttribute("game"); %>
-<% game.checkRound();%>
 <%
+    Game game = (Game) request.getSession().getAttribute("game");
+    game.checkRound();
     //error handling for missing parameters or parameter values happens in Game Class
-    if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
-        response.setIntHeader("Refresh", 3); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
-    }
+    //if (request.getParameter("questionId") != null && game.wasAnswered(Integer.parseInt(request.getParameter("questionId"))) && game.isNewRound() && !(game.getPlayerPoints() >= game.getBotPoints())) {
 
+    //} else {
+        if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
+            response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
+        }
+    //}
+    if (game.getCurrentRound() >= 10) {
+        game.checkRound();
+        request.getRequestDispatcher("/winner.jsp").forward(request, response);
+    }
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">

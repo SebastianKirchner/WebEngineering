@@ -1,5 +1,10 @@
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Avatar" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
+<% Game game = (Game) request.getSession().getAttribute("game"); %>
+<% Avatar winner = game.isPlayerInLead() ? game.getPlayer() : game.getBot(); %>
+<% Avatar loser = game.isPlayerInLead() ? game.getBot() : game.getPlayer(); %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -31,33 +36,33 @@
       <div role="main">
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-            <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
+            <p class="user-info <%=game.isPlayerCorrect() ? "positive" : "negative"%>-change">Du hast <%=game.isPlayerCorrect() ? "richtig geantwortet: +" +game.getPlayerQuestion().getValue() + "€": "falsch geantwortet: -" + game.getPlayerQuestion().getValue() + "€"%></p>
+            <p class="user-info <%=game.isBotCorrect() ? "positive" : "negative"%>-change"><%=game.getBot().getName()%> hat <%=game.isPlayerCorrect() ? "richtig geantwortet: +" +game.getBotQuestion().getValue() + "€": "falsch geantwortet: -" + game.getBotQuestion().getValue() + "€"%></p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
-               <h3 id="winnerannouncement">Gewinner: Black Widow</h3>
-               <img class="avatar" src="img/avatar/black-widow.png" alt="Spieler-Avatar Black Widow" />
+               <h3 id="winnerannouncement">Gewinner: <%=winner.getName() + " " + (game.isPlayerInLead()? "(Du)" : "(PC)")%></h3>
+               <img class="avatar" src="img/avatar/<%=winner.getImageFull()%>" alt="Spieler-Avatar <%=winner.getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Black Widow</td>
+                     <td class="playername"><%=winner.getName()%></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ 2000</td>
+                     <td class="playerpoints">€ <%=winner.getId().equals(game.getPlayer().getId()) ? game.getPlayerPoints() : game.getBotPoints()%></td>
                   </tr>
                </table>
             </section>
             <section class="playerinfo" aria-labelledby="loserheading">
-               <h3 id="loserheading" class="accessibility">Verlierer: Deadpool</h3>
-               <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+               <h3 id="loserheading" class="accessibility">Verlierer: <%=loser.getName()%></h3>
+               <img class="avatar" src="img/avatar/<%=loser.getImageHead()%>" alt="Spieler-Avatar <%=loser.getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername">Deadpool</td>
+                     <td class="playername"><%=loser.getName()%></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ 400</td>
+                     <td class="playerpoints">€ <%=loser.getId().equals(game.getPlayer().getId()) ? game.getPlayerPoints() : game.getBotPoints()%></td>
                   </tr>
                </table>
             </section>

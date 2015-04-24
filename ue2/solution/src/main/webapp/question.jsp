@@ -1,9 +1,5 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -69,7 +65,7 @@
                   </tr>
                </table>
             </section>
-            <p id="round">Frage: <%=game.getCurrentRound()%> / 10</p>
+            <p id="round">Frage: <%=game.getCurrentRound()+1%> / 10</p>
          </section>
             
       <!-- Question -->
@@ -83,7 +79,7 @@
                   <li><input name="answers" id="<%="answer_"+a.getId()%>" value="<%=a.getId()%>" type="checkbox"/><label class="tile clickable" for="<%="answer_"+a.getId()%>"><%=a.getText()%></label></li>
                    <%}%>
                </ul>
-               <input name ="timeleftvalue" id="timeleftvalue" type="hidden" value="100"/>
+               <input id="timeleftvalue" type="hidden" value="100"/>
                 <input name="questionId" type="hidden" value="<%=question.getId()%>">
                <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>
             </form>

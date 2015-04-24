@@ -1,36 +1,22 @@
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<% Game game = (Game) request.getSession().getAttribute("game"); %>
-<% game.checkRound();%>
 <%
-    //Code wird ausgeführt, wenn die Seite geladen wird
+    Game game = (Game) request.getSession().getAttribute("game");
+    game.checkRound();
+    //error handling for missing parameters or parameter values happens in Game Class
+    //if (request.getParameter("questionId") != null && game.wasAnswered(Integer.parseInt(request.getParameter("questionId"))) && game.isNewRound() && !(game.getPlayerPoints() >= game.getBotPoints())) {
 
-    if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
-        response.setIntHeader("Refresh", 5);
+    //} else {
+        if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
+            response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
+        }
+    //}
+    if (game.getCurrentRound() >= 10) {
+        game.checkRound();
+        request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }
-
-    /*
-    if (request.getParameter("timeleftvalue") != null && Integer.parseInt(request.getParameter("timeleftvalue")) == 0) {
-        if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), null)) {
-            response.setIntHeader("Refresh", 5);
-        }
-    } else if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-        if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"))) {
-            response.setIntHeader("Refresh", 5);
-        }
-    } else {
-        if (game.getCurrentRound() != 1) {
-            if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"))) {
-                response.setIntHeader("Refresh", 5);
-            }
-        }
-    }*/
-
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
