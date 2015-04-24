@@ -83,7 +83,7 @@
                   <li><input name="answers" id="<%="answer_"+a.getId()%>" value="<%=a.getId()%>" type="checkbox"/><label class="tile clickable" for="<%="answer_"+a.getId()%>"><%=a.getText()%></label></li>
                    <%}%>
                </ul>
-               <input id="timeleftvalue" type="hidden" value="100"/>
+               <input name ="timeleftvalue" id="timeleftvalue" type="hidden" value="100"/>
                 <input name="questionId" type="hidden" value="<%=question.getId()%>">
                <input class="greenlink formlink clickable" name="answer_submit" id="next" type="submit" value="antworten" accesskey="s"/>
             </form>

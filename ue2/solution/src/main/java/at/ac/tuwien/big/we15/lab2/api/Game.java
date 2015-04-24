@@ -15,7 +15,7 @@ public class Game {
 
     private Question bot_question;
 
-    private boolean player_done, bot_done, player_correct, bot_correct, bot_answered;
+    private boolean player_done, bot_done, player_correct, bot_correct, bot_answered, player_lead;
 
     private int current_round, bot_points, player_points;
 
@@ -35,23 +35,43 @@ public class Game {
         this.player_correct = false;
         this.player_done = false;
         this.bot_done = false;
+        this.player_lead = true;
 
     }
 
     /**
-     * Adds the given Question to a list of all answered questions to be able to tell which questions were already
-     * asked.
+     * Simulate a round and makes sure of a right order.
      *
-     * @param questionID id of the question that is to be "removed"
+     * @param questionID questionID as string
+     * @param values answer ids as values
+     * @return true -> round was finished no further action required; false -> refresh page
      */
-    public void removeQuestion(int questionID) {
-        Question to_remove = questionById(questionID);
-        if (to_remove != null) {
-            for (Category c : this.categories) {
-                if (c.equals(to_remove.getCategory())) {
-                    //c.removeQuestion(to_remove);
-                    answered.add(to_remove);
-                    break;
+    public boolean simulateRound(String questionID, String[] values) {
+
+        // necessary to prevent exception
+        if (current_round == 1 && questionID == null) {
+            return true;
+        }
+
+        if (isNewRound()) {
+            if (this.player_lead) {
+                playerMove(Integer.parseInt(questionID), values);
+                botMove();
+                return player_points >= bot_points ? true : false;
+            } else {
+                botMove();
+                return false;
+            }
+        } else {
+            if (player_done) {
+                botMove();
+                return true;
+            } else {
+                if (!wasAnswered(Integer.parseInt(questionID))) {
+                    playerMove(Integer.parseInt(questionID), values);
+                    return player_points >= bot_points ? true : false;
+                } else {
+                    return true;
                 }
             }
         }
@@ -69,7 +89,7 @@ public class Game {
         setPoints(this.player_correct ? question.getValue() : -question.getValue(), this.player.getId());
         removeQuestion(questionID);
         this.player_done = true;
-        checkRound();
+        //checkRound();
     }
 
     /**
@@ -83,7 +103,7 @@ public class Game {
         removeQuestion(question.getId());
         this.bot_done = true;
         this.bot_answered = true;
-        checkRound();
+        //checkRound();
     }
 
     /**
@@ -112,20 +132,37 @@ public class Game {
                     return false;
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
     /**
+     * Adds the given Question to a list of all answered questions to be able to tell which questions were already
+     * asked.
      *
-     * @param question
+     * @param questionID id of the question that is to be "removed"
+     */
+    public void removeQuestion(int questionID) {
+        Question to_remove = questionById(questionID);
+        if (to_remove != null) {
+            for (Category c : this.categories) {
+                if (c.equals(to_remove.getCategory())) {
+                    //c.removeQuestion(to_remove);
+                    answered.add(to_remove);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @param question_id
      * @return true if the given question has already been answered before
      */
-    public boolean wasAnswered(Question question) {
-        return answered.contains(question);
+    public boolean wasAnswered(int question_id) {
+        return answered.contains(questionById(question_id));
     }
 
     /**
@@ -201,9 +238,14 @@ public class Game {
         return this.player_points >= this.bot_points;
     }
 
-    public boolean isRoundFinished() {
-        return this.player_done && this.bot_done;
+    /**
+     *
+     * @return true if this is a new round (player and bot are done)
+     */
+    public boolean isNewRound() {
+        return !this.player_done && !this.bot_done;
     }
+
     /**
      *
      * @return the random question the bot was asked
@@ -236,13 +278,16 @@ public class Game {
         return this.bot_answered;
     }
 
+    public boolean playerAnwered() { return this.player_done; }
+
     /**
      * Check if both players made their move and if so reset boolean values and increment round number.
      */
-    private void checkRound() {
+    public void checkRound() {
         if (this.player_done && this.bot_done) {
             this.player_done = false;
             this.bot_done = false;
+            this.player_lead = this.player_points >= this.bot_points;
             this.current_round++;
         }
     }
@@ -258,7 +303,7 @@ public class Game {
 
         while (random <= 0) {
             int r = (int) ((Math.random() * 22.0 + 1));
-            if (!wasAnswered(questionById(r))) { random = r ; }
+            if (!wasAnswered(r)) { random = r ; }
         }
         return questionById(random);
     }

@@ -2,27 +2,15 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <% Game game = (Game) request.getSession().getAttribute("game"); %>
-<% boolean correct = false, answered = false;
-    //Code wird ausgeführt, wenn auf eine Frage geantwortet wird
-    if (game.isPlayerInLead()) {
-        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-            answered = true;
-            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
-            game.botMove();
-            if (!game.isPlayerInLead()) {  response.setIntHeader("Refresh", 0);; }
-        }
-    } else if (!game.isPlayerInLead() && !game.isRoundFinished()){
-        game.botMove();
-        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-            answered = true;
-            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
-        }
-
+<% game.checkRound();%>
+<%
+    //error handling for missing parameters or parameter values happens in Game Class
+    if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
+        response.setIntHeader("Refresh", 3); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
     }
+
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -91,17 +79,17 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-             <%if(game.isPlayerCorrect() && answered){%>
+             <%if(game.isPlayerCorrect() && game.playerAnwered()){%>
             <p class="user-info positive-change">Du hast richtig geantwortet: +<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
-             <%} else if (!game.isPlayerCorrect() && answered) {%>
+             <%} else if (!game.isPlayerCorrect() && game.playerAnwered()) {%>
              <p class="user-info negative-change">Du hast falsch geantwortet: -<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
              <%}%>
              <%if(game.isBotCorrect() && game.botAnswered()){%>
              <p class="user-info positive-change"><%=game.getBot().getName()%> hat richtig geantwortet: +<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
+             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
              <%} else if (!game.isBotCorrect() && game.botAnswered()) {%>
              <p class="user-info negative-change"><%=game.getBot().getName()%> hat falsch geantwortet: -<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
+             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
              <%}%>
             <form id="questionform" action="question.jsp" method="post">
                <fieldset>
@@ -116,7 +104,7 @@
                            <% for(Question q : c.getQuestions()){
                                 String questionId = "question" + q.getId();
                            %>
-                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" <%=game.wasAnswered(q) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
+                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" <%=game.wasAnswered(q.getId()) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
                            <% } %>
                        </ol>
                    </section>

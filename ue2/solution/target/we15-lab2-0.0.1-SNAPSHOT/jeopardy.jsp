@@ -6,23 +6,31 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <% Game game = (Game) request.getSession().getAttribute("game"); %>
-<% boolean correct = false, answered = false;
-    //Code wird ausgeführt, wenn auf eine Frage geantwortet wird
-    if (game.isPlayerInLead()) {
-        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-            answered = true;
-            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
-            game.botMove();
-            if (!game.isPlayerInLead()) {  response.setIntHeader("Refresh", 0);; }
-        }
-    } else if (!game.isPlayerInLead() && !game.isRoundFinished()){
-        game.botMove();
-        if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
-            answered = true;
-            game.playerMove(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"));
-        }
+<% game.checkRound();%>
+<%
+    //Code wird ausgeführt, wenn die Seite geladen wird
 
+    if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
+        response.setIntHeader("Refresh", 5);
     }
+
+    /*
+    if (request.getParameter("timeleftvalue") != null && Integer.parseInt(request.getParameter("timeleftvalue")) == 0) {
+        if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), null)) {
+            response.setIntHeader("Refresh", 5);
+        }
+    } else if(request.getParameter("answer_submit")!=null && request.getParameter("answer_submit").equals("antworten")) {
+        if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"))) {
+            response.setIntHeader("Refresh", 5);
+        }
+    } else {
+        if (game.getCurrentRound() != 1) {
+            if (!game.simulateRound(Integer.parseInt(request.getParameter("questionId")), request.getParameterValues("answers"))) {
+                response.setIntHeader("Refresh", 5);
+            }
+        }
+    }*/
+
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -91,17 +99,17 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-             <%if(game.isPlayerCorrect() && answered){%>
+             <%if(game.isPlayerCorrect() && game.playerAnwered()){%>
             <p class="user-info positive-change">Du hast richtig geantwortet: +<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
-             <%} else if (!game.isPlayerCorrect() && answered) {%>
+             <%} else if (!game.isPlayerCorrect() && game.playerAnwered()) {%>
              <p class="user-info negative-change">Du hast falsch geantwortet: -<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
              <%}%>
              <%if(game.isBotCorrect() && game.botAnswered()){%>
              <p class="user-info positive-change"><%=game.getBot().getName()%> hat richtig geantwortet: +<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
+             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
              <%} else if (!game.isBotCorrect() && game.botAnswered()) {%>
              <p class="user-info negative-change"><%=game.getBot().getName()%> hat falsch geantwortet: -<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info">Deadpool hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
+             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
              <%}%>
             <form id="questionform" action="question.jsp" method="post">
                <fieldset>
@@ -116,7 +124,7 @@
                            <% for(Question q : c.getQuestions()){
                                 String questionId = "question" + q.getId();
                            %>
-                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" <%=game.wasAnswered(q) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
+                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" <%=game.wasAnswered(q.getId()) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
                            <% } %>
                        </ol>
                    </section>
