@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Game {
 
-    private Avatar bot, player, first;
+    private Avatar bot, player;
 
     private Question bot_question, player_question;
 
@@ -27,7 +27,6 @@ public class Game {
         this.bot = Avatar.getOpponent(this.player);
         this.current_round = 0;
         this.categories = categories;
-        this.first = this.player;
         this.answered = new ArrayList<>();
         this.bot_question = new SimpleQuestion();
         this.bot_correct = false;
@@ -106,7 +105,7 @@ public class Game {
     public void botMove() {
         Question question = getRandomQuestion();
         this.bot_question = question;
-        this.bot_correct = isAnsweredCorrectly(question.getId(), getRandomAnswerValues(question));
+        this.bot_correct = (Math.abs(new Random().nextInt()) % 3) == 0;
         setPoints(this.bot_correct ? question.getValue() : -question.getValue(), this.bot.getId());
         removeQuestion(question.getId());
         this.bot_done = true;

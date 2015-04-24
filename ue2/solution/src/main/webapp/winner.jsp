@@ -37,7 +37,7 @@
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
             <p class="user-info <%=game.isPlayerCorrect() ? "positive" : "negative"%>-change">Du hast <%=game.isPlayerCorrect() ? "richtig geantwortet: +" +game.getPlayerQuestion().getValue() + "€": "falsch geantwortet: -" + game.getPlayerQuestion().getValue() + "€"%></p>
-            <p class="user-info <%=game.isBotCorrect() ? "positive" : "negative"%>-change"><%=game.getBot().getName()%> hat <%=game.isPlayerCorrect() ? "richtig geantwortet: +" +game.getBotQuestion().getValue() + "€": "falsch geantwortet: -" + game.getBotQuestion().getValue() + "€"%></p>
+            <p class="user-info <%=game.isBotCorrect() ? "positive" : "negative"%>-change"><%=game.getBot().getName()%> hat <%=game.isBotCorrect() ? "richtig geantwortet: +" +game.getBotQuestion().getValue() + "€": "falsch geantwortet: -" + game.getBotQuestion().getValue() + "€"%></p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
                <h3 id="winnerannouncement">Gewinner: <%=winner.getName() + " " + (game.isPlayerInLead()? "(Du)" : "(PC)")%></h3>
                <img class="avatar" src="img/avatar/<%=winner.getImageFull()%>" alt="Spieler-Avatar <%=winner.getName()%>" />

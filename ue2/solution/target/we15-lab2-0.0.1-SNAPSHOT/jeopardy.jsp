@@ -6,11 +6,6 @@
 <%
     Game game = (Game) request.getSession().getAttribute("game");
 
-    if (request.getParameter("restart") != null) {
-        request.setAttribute("game", new Game(Avatar.getRandomAvatar(), game.getCategories()));
-        game = (Game) request.getSession().getAttribute("game");
-    }
-
     game.checkRound();
     //error handling for missing parameters or parameter values happens in Game Class
     //if (request.getParameter("questionId") != null && game.wasAnswered(Integer.parseInt(request.getParameter("questionId"))) && game.isNewRound() && !(game.getPlayerPoints() >= game.getBotPoints())) {
@@ -20,7 +15,7 @@
             response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
         }
     //}
-    if (game.getCurrentRound() >= 2) {
+    if (game.getCurrentRound() >= 5) {
         game.checkRound();
         request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }

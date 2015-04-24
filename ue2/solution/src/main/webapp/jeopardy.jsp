@@ -15,7 +15,7 @@
             response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
         }
     //}
-    if (game.getCurrentRound() >= 2) {
+    if (game.getCurrentRound() >= 5) {
         game.checkRound();
         request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }
