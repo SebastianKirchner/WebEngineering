@@ -1,9 +1,16 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.Avatar" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     Game game = (Game) request.getSession().getAttribute("game");
+
+    if (request.getParameter("restart") != null) {
+        request.setAttribute("game", new Game(Avatar.getRandomAvatar(), game.getCategories()));
+        game = (Game) request.getSession().getAttribute("game");
+    }
+
     game.checkRound();
     //error handling for missing parameters or parameter values happens in Game Class
     //if (request.getParameter("questionId") != null && game.wasAnswered(Integer.parseInt(request.getParameter("questionId"))) && game.isNewRound() && !(game.getPlayerPoints() >= game.getBotPoints())) {
@@ -13,7 +20,7 @@
             response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
         }
     //}
-    if (game.getCurrentRound() >= 10) {
+    if (game.getCurrentRound() >= 2) {
         game.checkRound();
         request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }
