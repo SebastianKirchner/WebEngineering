@@ -1,6 +1,9 @@
-package at.ac.tuwien.big.we15.lab2.api;
+package at.ac.tuwien.big.we15.lab2.api.impl;
 
-import at.ac.tuwien.big.we15.lab2.api.impl.SimpleQuestion;
+import at.ac.tuwien.big.we15.lab2.api.Answer;
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
+import at.ac.tuwien.big.we15.lab2.api.Category;
+import at.ac.tuwien.big.we15.lab2.api.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,29 +14,32 @@ import java.util.Random;
  */
 public class Game {
 
-    private Avatar bot, player;
+    private PlayerBean bot, player;
 
-    private Question bot_question, player_question;
+    private boolean player_lead;
 
-    private boolean player_done, bot_done, player_correct, bot_correct, bot_answered, player_lead;
-
-    private int current_round, bot_points, player_points;
+    private int current_round;
 
     private List<Category> categories;
     private List<Question> answered;
 
-    public Game(Avatar player, List<Category> categories) {
-        this.player = player;
-        this.bot = Avatar.getOpponent(this.player);
+    public Game(List<Category> categories) {
+        this.player = new PlayerBean();
+        this.player.setAvatar(Avatar.getRandomAvatar());
+        this.player.setDone(false);
+        this.player.setCorrect(false);
+        this.player.setAnswered(false);
+
+        this.bot = new PlayerBean();
+        this.bot.setAvatar(Avatar.getOpponent(this.player.getAvatar()));
+        this.bot.setDone(false);
+        this.bot.setCorrect(false);
+        this.bot.setAnswered(false);
+
         this.current_round = 0;
         this.categories = categories;
         this.answered = new ArrayList<>();
-        this.bot_question = new SimpleQuestion();
-        this.bot_correct = false;
-        this.bot_answered = false;
-        this.player_correct = false;
-        this.player_done = false;
-        this.bot_done = false;
+
         this.player_lead = true;
 
     }
@@ -58,26 +64,26 @@ public class Game {
             if (this.player_lead) {
                 playerMove(Integer.parseInt(questionID), values);
                 botMove();
-                toReturn =  player_points >= bot_points ? true : false;
+                toReturn =  this.player.getScore() >= this.bot.getScore() ? true : false;
             } else {
                 botMove();
                 toReturn = false;
             }
         } else {
-            if (player_done) {
+            if (this.player.getDone()) {
                 botMove();
                 toReturn = true;
             } else {
                 if (!wasAnswered(Integer.parseInt(questionID))) {
                     playerMove(Integer.parseInt(questionID), values);
-                    toReturn = player_points >= bot_points ? true : false;
+                    toReturn =  this.player.getScore() >= this.bot.getScore() ? true : false;
                 } else {
                     toReturn = true;
                 }
             }
         }
 
-        if (this.player_done && this.bot_done) {
+        if (this.player.getDone() && this.bot.getDone()) {
             this.current_round++;
         }
 
@@ -92,11 +98,12 @@ public class Game {
      */
     public void playerMove(int questionID, String[] values) {
         Question question = questionById(questionID);
-        this.player_question = question;
-        this.player_correct = isAnsweredCorrectly(questionID, values);
-        setPoints(this.player_correct ? question.getValue() : -question.getValue(), this.player.getId());
+        this.player.setQuestion(question);
+        this.player.setCorrect(isAnsweredCorrectly(questionID, values));
+        setPoints(this.player.getCorrect() ? this.player.getQuestion().getValue() : -this.player.getQuestion().getValue(), this.player.getAvatar().getId());
         removeQuestion(questionID);
-        this.player_done = true;
+        this.player.setDone(true);
+        this.player.setAnswered(true);
     }
 
     /**
@@ -104,12 +111,12 @@ public class Game {
      */
     public void botMove() {
         Question question = getRandomQuestion();
-        this.bot_question = question;
-        this.bot_correct = (Math.abs(new Random().nextInt()) % 3) == 0;
-        setPoints(this.bot_correct ? question.getValue() : -question.getValue(), this.bot.getId());
+        this.bot.setQuestion(question);
+        this.bot.setCorrect((Math.abs(new Random().nextInt()) % 3) == 0);
+        setPoints(this.bot.getCorrect() ? this.bot.getQuestion().getValue() : -this.bot.getQuestion().getValue(), this.bot.getAvatar().getId());
         removeQuestion(question.getId());
-        this.bot_done = true;
-        this.bot_answered = true;
+        this.bot.setDone(true);
+        this.bot.setAnswered(true);
     }
 
     /**
@@ -154,7 +161,6 @@ public class Game {
         if (to_remove != null) {
             for (Category c : this.categories) {
                 if (c.equals(to_remove.getCategory())) {
-                    //c.removeQuestion(to_remove);
                     answered.add(to_remove);
                     break;
                 }
@@ -175,7 +181,7 @@ public class Game {
      *
      * @return the human player
      */
-    public Avatar getPlayer() {
+    public PlayerBean getPlayer() {
         return this.player;
     }
 
@@ -183,24 +189,8 @@ public class Game {
      *
      * @return the computer player
      */
-    public Avatar getBot() {
+    public PlayerBean getBot() {
         return this.bot;
-    }
-
-    /**
-     *
-     * @return the players points
-     */
-    public int getPlayerPoints() {
-        return this.player_points;
-    }
-
-    /**
-     *
-     * @return the computer players points
-     */
-    public int getBotPoints() {
-        return this.bot_points;
     }
 
     /**
@@ -209,12 +199,6 @@ public class Game {
      */
     public int getCurrentRound() {
         return this.current_round;
-    }
-
-    public void checkRoundNumber() {
-        if (this.player_done && this.bot_done) {
-            ++this.current_round;
-        }
     }
 
     /**
@@ -247,7 +231,7 @@ public class Game {
      * @return true if player points are larger or equal to bots points
      */
     public boolean isPlayerInLead() {
-        return this.player_points >= this.bot_points;
+        return this.player.getScore() >= this.bot.getScore();
     }
 
     /**
@@ -255,54 +239,17 @@ public class Game {
      * @return true if this is a new round (player and bot are done)
      */
     public boolean isNewRound() {
-        return !this.player_done && !this.bot_done;
+        return !this.player.getDone() && !this.bot.getDone();
     }
-
-    public Question getPlayerQuestion() {  return this.player_question; }
-
-    /**
-     *
-     * @return the random question the bot was asked
-     */
-    public Question getBotQuestion() {
-        return this.bot_question;
-    }
-
-    /**
-     *
-     * @return true if player answered correctly
-     */
-    public boolean isPlayerCorrect() {
-        return this.player_correct;
-    }
-
-    /**
-     *
-     * @return true if bot answered correctly
-     */
-    public boolean isBotCorrect() {
-        return this.bot_correct;
-    }
-
-    /**
-     *
-     * @return true if the bot already answered
-     */
-    public boolean botAnswered() {
-        return this.bot_answered;
-    }
-
-    public boolean playerAnwered() { return this.player_done; }
 
     /**
      * Check if both players made their move and if so reset boolean values and increment round number.
      */
     public void checkRound() {
-        if (this.player_done && this.bot_done) {
-            this.player_done = false;
-            this.bot_done = false;
-            this.player_lead = this.player_points >= this.bot_points;
-            //this.current_round++;
+        if (this.player.getDone() && this.bot.getDone()) {
+            this.player.setDone(false);
+            this.bot.setDone(false);
+            this.player_lead = this.player.getScore() >= this.bot.getScore();
         }
     }
 
@@ -323,48 +270,15 @@ public class Game {
     }
 
     /**
-     * Choose random answers for the given question, to give the bot a higher chance choose at least one correct
-     * answer all the time.
-     *
-     * @param question Question to get random answers for
-     * @return string array containing at least 1 correct answer id
-     */
-    private String[] getRandomAnswerValues(Question question) {
-        String[] values = new String[(int) ((double) Math.random()*question.getAllAnswers().size()-2 + 1)];
-        List<Integer> taken = new ArrayList<>();
-
-        for (int i=0; i<values.length; ++i) {
-            if (i == 0) {
-                values[i] = String.valueOf(question.getCorrectAnswers().get(0).getId());
-                taken.add(question.getCorrectAnswers().get(0).getId());
-            } else {
-                boolean valid = false;
-                int newID = -1;
-                while (!valid) {
-                    newID = new Random().nextInt(question.getAllAnswers().size());
-                    if (!taken.contains(newID) && newID < question.getAllAnswers().size() && newID > 0) {
-                        valid = true;
-                    }
-
-                }
-                values[i] = String.valueOf(newID);
-                taken.add(newID);
-            }
-        }
-
-        return values;
-    }
-
-    /**
      *
      * @param points points to be added or subtracted
      * @param avatar_id the avatar whos points are to be updated
      */
     private void setPoints(int points, String avatar_id) {
-        if (this.player.getId().equals(avatar_id)) {
-            this.player_points += points;
-        } else if (this.bot.getId().equals(avatar_id)) {
-            this.bot_points += points;
+        if (this.player.getAvatar().getId().equals(avatar_id)) {
+            this.player.setScore(this.player.getScore()+points);
+        } else if (this.bot.getAvatar().getId().equals(avatar_id)) {
+            this.bot.setScore(this.bot.getScore()+points);
         }
     }
 

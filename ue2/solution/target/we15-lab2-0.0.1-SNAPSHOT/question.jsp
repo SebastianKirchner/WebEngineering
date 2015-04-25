@@ -1,10 +1,12 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Answer" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.Game" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
+<jsp:useBean id="bot" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
 <% Game game = (Game) session.getAttribute("game"); %>
 <% Question question = game.questionById(Integer.parseInt(request.getParameter("question_selection")));%>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -39,29 +41,29 @@
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-               <img class="avatar" src="img/avatar/<%=game.getPlayer().getImageHead()%>" alt="Spieler-Avatar <%=game.getPlayer().getName()%>" />
+               <img class="avatar" src="img/avatar/<%=user.getAvatar().getImageHead()%>" alt="Spieler-Avatar <%=user.getAvatar().getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"><%=game.getPlayer().getName()%> (Du)</td>
+                     <td class="playername"><%=user.getAvatar().getName()%> (Du)</td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"><%=game.getPlayerPoints()%> €</td>
+                     <td class="playerpoints"><%=user.getScore()%> €</td>
                   </tr>
                </table>
             </section>
             <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-               <img class="avatar" src="img/avatar/<%=game.getBot().getImageHead()%>" alt="Spieler-Avatar <%=game.getBot().getName()%>" />
+               <img class="avatar" src="img/avatar/<%=bot.getAvatar().getImageHead()%>" alt="Spieler-Avatar <%=bot.getAvatar().getName()%>" />
                <table>
                   <tr>
                      <th class="accessibility">Spielername</th>
-                     <td class="playername"><%=game.getBot().getName()%></td>
+                     <td class="playername"><%=bot.getAvatar().getName()%></td>
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints"><%=game.getBotPoints()%> €</td>
+                     <td class="playerpoints"><%=bot.getScore()%> €</td>
                   </tr>
                </table>
             </section>

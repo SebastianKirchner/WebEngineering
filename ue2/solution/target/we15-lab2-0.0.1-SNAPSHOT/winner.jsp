@@ -1,10 +1,12 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Avatar" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.Game" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <% Game game = (Game) request.getSession().getAttribute("game"); %>
-<% Avatar winner = game.isPlayerInLead() ? game.getPlayer() : game.getBot(); %>
-<% Avatar loser = game.isPlayerInLead() ? game.getBot() : game.getPlayer(); %>
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
+<jsp:useBean id="bot" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
+<% Avatar winner = user.getScore() >= bot.getScore() ? user.getAvatar() : bot.getAvatar(); %>
+<% Avatar loser = user.getScore() >= bot.getScore() ? bot.getAvatar() : user.getAvatar(); %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
         <meta charset="utf-8"/>
@@ -36,8 +38,8 @@
       <div role="main">
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
-            <p class="user-info <%=game.isPlayerCorrect() ? "positive" : "negative"%>-change">Du hast <%=game.isPlayerCorrect() ? "richtig geantwortet: +" +game.getPlayerQuestion().getValue() + "€": "falsch geantwortet: -" + game.getPlayerQuestion().getValue() + "€"%></p>
-            <p class="user-info <%=game.isBotCorrect() ? "positive" : "negative"%>-change"><%=game.getBot().getName()%> hat <%=game.isBotCorrect() ? "richtig geantwortet: +" +game.getBotQuestion().getValue() + "€": "falsch geantwortet: -" + game.getBotQuestion().getValue() + "€"%></p>
+            <p class="user-info <%=user.getCorrect() ? "positive" : "negative"%>-change">Du hast <%=user.getCorrect() ? "richtig geantwortet: +" +user.getQuestion().getValue() + "€": "falsch geantwortet: -" + user.getQuestion().getValue() + "€"%></p>
+            <p class="user-info <%=bot.getCorrect() ? "positive" : "negative"%>-change"><%=bot.getAvatar().getName()%> hat <%=bot.getCorrect() ? "richtig geantwortet: +" +bot.getQuestion().getValue() + "€": "falsch geantwortet: -" + bot.getQuestion().getValue() + "€"%></p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
                <h3 id="winnerannouncement">Gewinner: <%=winner.getName() + " " + (game.isPlayerInLead()? "(Du)" : "(PC)")%></h3>
                <img class="avatar" src="img/avatar/<%=winner.getImageFull()%>" alt="Spieler-Avatar <%=winner.getName()%>" />
@@ -48,7 +50,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ <%=winner.getId().equals(game.getPlayer().getId()) ? game.getPlayerPoints() : game.getBotPoints()%></td>
+                     <td class="playerpoints">€ <%=winner.getId().equals(user.getAvatar().getId()) ? user.getScore() : bot.getScore()%></td>
                   </tr>
                </table>
             </section>
@@ -62,7 +64,7 @@
                   </tr>
                   <tr>
                      <th class="accessibility">Spielerpunkte</th>
-                     <td class="playerpoints">€ <%=loser.getId().equals(game.getPlayer().getId()) ? game.getPlayerPoints() : game.getBotPoints()%></td>
+                     <td class="playerpoints">€ <%=loser.getId().equals(user.getAvatar().getId()) ? user.getScore() : bot.getScore()%></td>
                   </tr>
                </table>
             </section>

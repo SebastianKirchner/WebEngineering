@@ -1,4 +1,7 @@
-package at.ac.tuwien.big.we15.lab2.api;
+package at.ac.tuwien.big.we15.lab2.api.impl;
+
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
+import at.ac.tuwien.big.we15.lab2.api.Question;
 
 import java.io.Serializable;
 
@@ -10,9 +13,28 @@ public class PlayerBean implements Serializable {
     private Avatar avatar;
     private Question question;
     private int score;
-    private boolean correct, done;
+    private boolean correct;
+    private boolean done;
+    private boolean answered;
+    private boolean inLead;
 
     public PlayerBean() {};
+
+    public boolean getInLead() {
+        return inLead;
+    }
+
+    public void setInLead(boolean inLead) {
+        this.inLead = inLead;
+    }
+
+    public boolean getAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(boolean answered) {
+        this.answered = answered;
+    }
 
     public Avatar getAvatar() {
         return avatar;
@@ -38,7 +60,7 @@ public class PlayerBean implements Serializable {
         this.score = score;
     }
 
-    public boolean isCorrect() {
+    public boolean getCorrect() {
         return correct;
     }
 
@@ -46,7 +68,7 @@ public class PlayerBean implements Serializable {
         this.correct = correct;
     }
 
-    public boolean isDone() {
+    public boolean getDone() {
         return done;
     }
 

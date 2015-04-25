@@ -1,8 +1,10 @@
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Category" %>
-<%@ page import="at.ac.tuwien.big.we15.lab2.api.Game" %>
+<%@ page import="at.ac.tuwien.big.we15.lab2.api.impl.Game" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Question" %>
 <%@ page import="at.ac.tuwien.big.we15.lab2.api.Avatar" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<jsp:useBean id="user" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
+<jsp:useBean id="bot" type="at.ac.tuwien.big.we15.lab2.api.impl.PlayerBean" scope="session" />
 <%
     Game game = (Game) request.getSession().getAttribute("game");
 
@@ -55,29 +57,29 @@
             <h2 id="gameinfoinfoheading" class="accessibility">Spielinformationen</h2>
             <section id="firstplayer" class="playerinfo <%=game.isPlayerInLead()? "leader" : ""%>" aria-labelledby="firstplayerheading">
                <h3 id="firstplayerheading" class="accessibility">Führender Spieler</h3>
-                <img class="avatar" src="img/avatar/<%=game.getPlayer().getImageHead()%>" alt="Spieler-Avatar <%=game.getPlayer().getName()%>" />
+                <img class="avatar" src="img/avatar/<%=user.getAvatar().getImageHead()%>" alt="Spieler-Avatar <%=user.getAvatar().getName()%>" />
                 <table>
                     <tr>
                         <th class="accessibility">Spielername</th>
-                        <td class="playername"><%=game.getPlayer().getName()%> (Du)</td>
+                        <td class="playername"><%=user.getAvatar().getName()%> (Du)</td>
                     </tr>
                     <tr>
                         <th class="accessibility">Spielerpunkte</th>
-                        <td class="playerpoints"><%=game.getPlayerPoints()%> €</td>
+                        <td class="playerpoints"><%=user.getScore()%> €</td>
                     </tr>
                 </table>
             </section>
             <section id="secondplayer" class="playerinfo <%=game.isPlayerInLead()? "" : "leader"%>" aria-labelledby="secondplayerheading">
                <h3 id="secondplayerheading" class="accessibility">Zweiter Spieler</h3>
-                <img class="avatar" src="img/avatar/<%=game.getBot().getImageHead()%>" alt="Spieler-Avatar <%=game.getBot().getName()%>" />
+                <img class="avatar" src="img/avatar/<%=bot.getAvatar().getImageHead()%>" alt="Spieler-Avatar <%=bot.getAvatar().getName()%>" />
                 <table>
                     <tr>
                         <th class="accessibility">Spielername</th>
-                        <td class="playername"><%=game.getBot().getName()%></td>
+                        <td class="playername"><%=bot.getAvatar().getName()%></td>
                     </tr>
                     <tr>
                         <th class="accessibility">Spielerpunkte</th>
-                        <td class="playerpoints"><%=game.getBotPoints()%> €</td>
+                        <td class="playerpoints"><%=bot.getScore()%> €</td>
                     </tr>
                 </table>
             </section>
@@ -87,17 +89,17 @@
          <!-- Question -->
          <section id="question-selection" aria-labelledby="questionheading">
             <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-             <%if(game.isPlayerCorrect() && game.playerAnwered()){%>
-            <p class="user-info positive-change">Du hast richtig geantwortet: +<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
-             <%} else if (!game.isPlayerCorrect() && game.playerAnwered()) {%>
-             <p class="user-info negative-change">Du hast falsch geantwortet: -<%=game.questionById(Integer.parseInt(request.getParameter("questionId"))).getValue()%> €</p>
+             <%if(user.getCorrect() && user.getAnswered()){%>
+            <p class="user-info positive-change">Du hast richtig geantwortet: +<%=user.getQuestion().getValue()%> €</p>
+             <%} else if (!user.getCorrect() && user.getAnswered()) {%>
+             <p class="user-info negative-change">Du hast falsch geantwortet: -<%=user.getQuestion().getValue()%> €</p>
              <%}%>
-             <%if(game.isBotCorrect() && game.botAnswered()){%>
-             <p class="user-info positive-change"><%=game.getBot().getName()%> hat richtig geantwortet: +<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
-             <%} else if (!game.isBotCorrect() && game.botAnswered()) {%>
-             <p class="user-info negative-change"><%=game.getBot().getName()%> hat falsch geantwortet: -<%=game.getBotQuestion().getValue()%> €</p>
-             <p class="user-info"><%=game.getBot().getName()%> hat <%=game.getBotQuestion().getCategory().getName()%> für € <%=game.getBotQuestion().getValue()%> gewählt.</p>
+             <%if(bot.getCorrect() && bot.getAnswered()){%>
+             <p class="user-info positive-change"><%=bot.getAvatar().getName()%> hat richtig geantwortet: +<%=bot.getQuestion().getValue()%> €</p>
+             <p class="user-info"><%=bot.getAvatar().getName()%> hat <%=bot.getQuestion().getCategory().getName()%> für € <%=bot.getQuestion().getValue()%> gewählt.</p>
+             <%} else if (!bot.getCorrect() && bot.getAnswered()) {%>
+             <p class="user-info negative-change"><%=bot.getAvatar().getName()%> hat falsch geantwortet: -<%=bot.getQuestion().getValue()%> €</p>
+             <p class="user-info"><%=bot.getAvatar().getName()%> hat <%=bot.getQuestion().getCategory().getName()%> für € <%=bot.getQuestion().getValue()%> gewählt.</p>
              <%}%>
             <form id="questionform" action="question.jsp" method="post">
                <fieldset>
