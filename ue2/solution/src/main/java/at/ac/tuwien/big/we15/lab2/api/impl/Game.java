@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Sebastian on 23.04.2015.
- */
 public class Game {
 
     private PlayerBean bot, player;

@@ -153,7 +153,7 @@
             });
 
             function enableButton() {
-                document.getElementById('next').disabled = false;
+                $("#next").prop("disabled", false);
             }
 
             //]]>

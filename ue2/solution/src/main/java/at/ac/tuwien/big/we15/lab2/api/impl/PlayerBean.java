@@ -5,9 +5,6 @@ import at.ac.tuwien.big.we15.lab2.api.Question;
 
 import java.io.Serializable;
 
-/**
- * Created by Sebastian on 25.04.2015.
- */
 public class PlayerBean implements Serializable {
 
     private Avatar avatar;

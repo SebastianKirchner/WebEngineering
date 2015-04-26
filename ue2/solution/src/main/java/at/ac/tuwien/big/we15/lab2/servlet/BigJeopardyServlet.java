@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by David on 20.04.2015.
- */
 @WebServlet(name="Jeopardy", urlPatterns = {"/jeopardy"})
 public class BigJeopardyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
