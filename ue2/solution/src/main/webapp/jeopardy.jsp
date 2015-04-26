@@ -114,13 +114,13 @@
                            <% for(Question q : c.getQuestions()){
                                 String questionId = "question" + q.getId();
                            %>
-                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" <%=game.wasAnswered(q.getId()) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
+                           <li><input name="question_selection" id="<%=questionId%>" value="<%=q.getId()%>" type="radio" onclick="enableButton()" <%=game.wasAnswered(q.getId()) ? "disabled=\"disabled\"" : ""%> /><label class="tile clickable" for="<%=questionId%>">€ <%=q.getValue()%></label></li>
                            <% } %>
                        </ol>
                    </section>
                    <% } %>
                </fieldset>               
-               <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="wählen" accesskey="s" />
+               <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="wählen" accesskey="s" disabled="disabled" />
             </form>
          </section>
          
@@ -150,7 +150,12 @@
 	                			+ '</time></p>')
 	                }
             	}
-            });            
+            });
+
+            function enableButton() {
+                document.getElementById('next').disabled = false;
+            }
+
             //]]>
         </script>
     </body>
