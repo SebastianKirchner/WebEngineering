@@ -9,15 +9,14 @@
     Game game = (Game) request.getSession().getAttribute("game");
 
     game.checkRound();
-    //error handling for missing parameters or parameter values happens in Game Class
-    //if (request.getParameter("questionId") != null && game.wasAnswered(Integer.parseInt(request.getParameter("questionId"))) && game.isNewRound() && !(game.getPlayerPoints() >= game.getBotPoints())) {
 
-    //} else {
-        if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
-            response.setIntHeader("Refresh", 1); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible
+    if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
+        if (game.getCurrentRound() < 10) {
+            response.setIntHeader("Refresh", 0); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible}
         }
-    //}
-    if (game.getCurrentRound() >= 5) {
+    }
+
+    if (game.getCurrentRound() >= 10) {
         game.checkRound();
         request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }
