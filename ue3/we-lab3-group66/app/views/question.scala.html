@@ -5,10 +5,10 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Jeopardy! - Fragenbeantwortung</title>
-        <link rel="stylesheet" type="text/css" href="style/base.css" />
-        <link rel="stylesheet" type="text/css" href="style/screen.css" />
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/framework.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/base.css")" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/screen.css")" />
+        <script src="@routes.Assets.at("javascripts/jquery.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/framework.js")" type="text/javascript"></script>
     </head>
     <body id="question-page">
       <a class="accessibility" href="#questions">Zur Fragenauswahl springen</a>
@@ -23,7 +23,7 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login.xhtml" accesskey="l">Abmelden</a></li>
+				<li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login" accesskey="l">Abmelden</a></li>
 			</ul>
 		</nav>
       
@@ -65,7 +65,7 @@
             
       <!-- Question -->
       <section id="question" aria-labelledby="questionheading">
-            <form id="questionform" action="jeopardy.xhtml" method="get">
+            <form id="questionform" action="jeopardy" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>
                <p id="questiontype">TUWIEN für € 300</p>
                <p id="questiontext">Diese Lehrveranstaltungen bilden das Modul EWA.</p>

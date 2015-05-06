@@ -5,13 +5,13 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Business Informatics Group Jeopardy! - Login</title>
-        <link rel="stylesheet" type="text/css" href="style/base.css" />
-        <link rel="stylesheet" type="text/css" href="style/screen.css" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/base.css")" />
+        <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/screen.css")" />
     </head>
     
     <body id="login-page">
       <a class="accessibility" href="#login">Zum Login springen</a>
-	  <a class="accessibility" title="Klicke hier um dich zu registrieren" href="register.xhtml" accesskey="r">Registrieren</a>  
+	  <a class="accessibility" title="Klicke hier um dich zu registrieren" href="register" accesskey="r">Registrieren</a>  
       <!-- Header -->
       <header role="banner" aria-labelledby="bannerheading">
          <h1 id="bannerheading">
@@ -23,7 +23,7 @@
         <div role="main">
             <section id="login" aria-labelledby="loginheading">
                <h2 id="loginheading" class="accessibility">Login</h2>
-                <form action="jeopardy.xhtml" method="post">
+                <form action="jeopardy" method="post">
                     <fieldset>
                         <legend id="logindata">Login</legend>
                         <label for="username">Benutzername:</label>
@@ -38,7 +38,7 @@
             <section id="registerforward" aria-labelledby="registerheading">
                 <h2 id="registerheading" class="accessibility">Registrierung</h2>
                 <p id="registerhint">Nicht registriert?</p>
-                <a class="contentlink orangelink" title="Klicke hier um dich zu registrieren" href="register.xhtml" accesskey="r">Zur Registrierung</a>
+                <a class="contentlink orangelink" title="Klicke hier um dich zu registrieren" href="register" accesskey="r">Zur Registrierung</a>
             </section>
         </div>
 
