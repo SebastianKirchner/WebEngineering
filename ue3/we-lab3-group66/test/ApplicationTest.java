@@ -3,6 +3,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
+import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
+import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
+import at.ac.tuwien.big.we15.lab2.api.User;
+import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
+import at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.*;
 
@@ -18,6 +24,7 @@ import play.twirl.api.Content;
 
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
+import scala.*;
 
 
 /**
@@ -35,10 +42,14 @@ public class ApplicationTest {
     }
 
     @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Your new application is ready.");
-        assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Your new application is ready.");
+    public void factory(){
+        JeopardyFactory factory = new PlayJeopardyFactory("E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/conf/data.de.json");
+
+        User user = new SimpleUser();
+        user.setName("Dave");
+        user.setAvatar(Avatar.BEETLE);
+        JeopardyGame game = factory.createGame(user);
+        int a = 0;
     }
 
 

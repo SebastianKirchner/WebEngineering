@@ -43,11 +43,11 @@ public class Loginuser {
         this.birthdate = birthdate;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -62,7 +62,6 @@ public class Loginuser {
     @Id
     private String username;
 
-
     private String password;
 
     private String firstname;
@@ -71,7 +70,7 @@ public class Loginuser {
 
     private String birthdate;
 
-    private char gender;
+    private String gender;
 
     private String avatar;
 
@@ -93,6 +92,7 @@ public class Loginuser {
     }
 
     public static Loginuser getLoginuser(String username){
+
         return JPA.em().find(Loginuser.class, username);
     }
 

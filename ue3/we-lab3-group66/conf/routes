@@ -14,7 +14,7 @@ GET         /register            controllers.Application.register()
 # Seiten
 
 GET         /jeopardy            controllers.Application.jeopardy()
-POST        /jeopardy            controllers.Application.jeopardy()
+POST        /jeopardy/           controllers.Application.jeopardy()
 
 POST        /question            controllers.Application.question()
 
