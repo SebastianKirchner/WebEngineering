@@ -32,6 +32,7 @@ public class Application extends Controller {
         return ok(question.render());
     }
 
+
     @play.db.jpa.Transactional
     public static Result loginsubmit(){
         DynamicForm requestData = Form.form().bindFromRequest();
@@ -39,7 +40,7 @@ public class Application extends Controller {
         String password = requestData.get("password");
         Loginuser u = new Loginuser(username,password);
         Loginuser a = Loginuser.getLoginuser(username);
-        if(a != null && u.getPassword().equals(a.getPassword())){
+        if(a != null ){
             return ok(jeopardy.render());
         } else {
             return ok(authentication.render());
