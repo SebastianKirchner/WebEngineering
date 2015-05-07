@@ -13,7 +13,7 @@ import static play.data.Form.*;
 public class Application extends Controller {
 
 	public static Result authentication(){
-        return ok(authentication.render());
+        return ok(authentication.render(""));
 	}
 
     public static Result index() {
@@ -43,7 +43,7 @@ public class Application extends Controller {
         if(a != null ){
             return ok(jeopardy.render());
         } else {
-            return ok(authentication.render());
+            return ok(authentication.render("Benutzername oder Passwort falsch"));
         }
 
 
@@ -63,7 +63,7 @@ public class Application extends Controller {
         u.setGender('f');
         u.setAvatar(requestData.get("avatar"));
         Loginuser.saveLoginuser(u);
-        return ok(authentication.render());
+        return ok(authentication.render(""));
 
     }
 	

@@ -1,7 +1,58 @@
-New log file opened at Thu May 07 10:45:41 CEST 2015 by 8304@Dave-PC
-Taking next connection to: 53061
-New client attempting to connect on port: 53062-53061
-  Address = /169.254.80.80:53061
-This client on port 53062 has uuid 692c4fc4-dd8c-461d-a074-cc3f7bf361df configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
-Connected Clients: activator-692c4fc4-dd8c-461d-a074-cc3f7bf361df
-Taking next connection to: 53061
+New log file opened at Thu May 07 11:09:04 CEST 2015 by 8256@Dave-PC
+Taking next connection to: 53578
+New client attempting to connect on port: 53579-53578
+  Address = /169.254.80.80:53578
+This client on port 53579 has uuid aa8ca575-4ff0-46cf-be11-1f1fd0f351bf configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-aa8ca575-4ff0-46cf-be11-1f1fd0f351bf
+Taking next connection to: 53578
+New client attempting to connect on port: 53580-53578
+  Address = /169.254.80.80:53578
+Handshake exception on socket: 53580
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 53578
+New client attempting to connect on port: 53581-53578
+  Address = /169.254.80.80:53578
+This client on port 53581 has uuid 82157d64-245c-4e85-ac9b-234e59bb9633 configName activator humanReadableName Activator protocolVersion 1 featureTags Vector()
+Connected Clients: activator-aa8ca575-4ff0-46cf-be11-1f1fd0f351bf, activator-82157d64-245c-4e85-ac9b-234e59bb9633
+Taking next connection to: 53578
+New client attempting to connect on port: 53588-53578
+  Address = /169.254.80.80:53578
+Handshake exception on socket: 53588
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 53578
+New client attempting to connect on port: 53589-53578
+  Address = /169.254.80.80:53578
+This client on port 53589 has uuid 67e4b7a0-29fa-422e-9ecf-2dea021585be configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-82157d64-245c-4e85-ac9b-234e59bb9633, play-fork-run-67e4b7a0-29fa-422e-9ecf-2dea021585be
+Taking next connection to: 53578
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 53578

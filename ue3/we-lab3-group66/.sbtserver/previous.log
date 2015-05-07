@@ -1,5 +1,5 @@
-New log file opened at Thu May 07 10:45:21 CEST 2015 by 7608@Dave-PC
-jvm 7608@Dave-PC
+New log file opened at Thu May 07 10:49:23 CEST 2015 by 8340@Dave-PC
+jvm 8340@Dave-PC
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in E:\IntelliJProjects\WebEngineeringMaven\ue3\we-lab3-group66\project, returning: (we-lab3-group66-build)
 Loading project definition from E:\IntelliJProjects\WebEngineeringMaven\ue3\we-lab3-group66\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@336471eb, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@2eee14b3, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,10 +65,82 @@ Set current project to we-lab3-group66 (in build file:/E:/IntelliJProjects/WebEn
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@8bd795f, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 3 s, completed 07.05.2015 10:49:36
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@78af3080, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 07.05.2015 10:49:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@65644db2, check cycles: false
+Total time: 0 s, completed 07.05.2015 10:49:38
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@49f6cfb5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 07.05.2015 10:49:39
+> server-post-command-cleanup
+> server-handle-next-server-request
 Done executing sbt server engine, result Right(Exit(0))
 Closing listening server socket
 Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 7608@Dave-PC logs at Thu May 07 10:45:32 CEST 2015, goodbye.
+Closing the 8340@Dave-PC logs at Thu May 07 10:58:25 CEST 2015, goodbye.
