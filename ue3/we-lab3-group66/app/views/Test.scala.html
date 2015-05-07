@@ -1,0 +1,9 @@
+@(userForm: Form[Loginuser])
+@helper.form(action = routes.Application.jeopardy()){
+
+    @helper.inputText(userForm("username"))
+
+    @helper.inputText(userForm("password"))
+
+    <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value="Anmelden"/>
+}
