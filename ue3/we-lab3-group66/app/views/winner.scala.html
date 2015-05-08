@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame)(marvinQ: at.ac.tuwien.big.we15.lab2.api.Question)
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
@@ -23,7 +23,7 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="login" accesskey="l">Abmelden</a></li>
+                <li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="logout" accesskey="l">Abmelden</a></li>
             </ul>
         </nav>
 
@@ -31,33 +31,48 @@
         <div role="main">
             <section id="gameinfo" aria-labelledby="winnerinfoheading">
                 <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
-                <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-                <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
+                @if(game.getHumanPlayer().hasAnsweredQuestion()) {
+                    @if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() > 0) {
+                        <p class="user-info positive-change">@Messages("game.human.correct") @game.getHumanPlayer().getLatestProfitChange().toString() € </p>
+                    } else {@if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() < 0) {
+                        <p class="user-info negative-change">@Messages("game.human.wrong") -@game.getHumanPlayer().getLatestProfitChange().toString() €</p>
+                    }}
+                }
+                @if(marvinQ != null) {
+                    @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() > 0) {
+                        <p class="user-info positive-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.correct") @game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                    } else { @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() < 0) {
+                        <p class="user-info negative-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.wrong") -@game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                    }}
+                    @if(marvinQ != null) {
+                        <p class="user-info">@Messages("game.marvin.question", game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + "€")</p>
+                    }
+                }
                 <section class="playerinfo leader" aria-labelledby="winnerannouncement">
-                    <h3 id="winnerannouncement">Gewinner: Black Widow</h3>
-                    <img class="avatar" src="img/avatar/black-widow.png" alt="Spieler-Avatar Black Widow" />
+                    <h3 id="winnerannouncement">Gewinner: @game.getWinner().getUser().getName()</h3>
+                    <img class="avatar" src="public/images/avatar/@game.getWinner().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getWinner().getUser().getAvatar().getImageHead()" />
                     <table>
                         <tr>
-                            <th class="accessibility">Spielername</th>
-                            <td class="playername">Black Widow</td>
+                            <th class="accessibility">@Messages("game.access.name")</th>
+                            <td class="playername">@game.getWinner.getUser.getName()</td>
                         </tr>
                         <tr>
                             <th class="accessibility">Spielerpunkte</th>
-                            <td class="playerpoints">€ 2000</td>
+                            <td class="playerpoints">@game.getWinner().getProfit()</td>
                         </tr>
                     </table>
                 </section>
                 <section class="playerinfo" aria-labelledby="loserheading">
-                    <h3 id="loserheading" class="accessibility">Verlierer: Deadpool</h3>
-                    <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+                    <h3 id="loserheading" class="accessibility">Verlierer: @game.getSecond.getUser.getName</h3>
+                    <img class="avatar" src="public/images/avatar/@game.getSecond().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getSecond().getUser().getAvatar().getImageHead()" />
                     <table>
                         <tr>
-                            <th class="accessibility">Spielername</th>
-                            <td class="playername">Deadpool</td>
+                            <th class="accessibility">@Messages("game.access.name")</th>
+                            <td class="playername">@game.getSecond.getUser.getName</td>
                         </tr>
                         <tr>
-                            <th class="accessibility">Spielerpunkte</th>
-                            <td class="playerpoints">€ 400</td>
+                            <th class="accessibility">@Messages("game.access.points")</th>
+                            <td class="playerpoints">€ @game.getSecond().getProfit()</td>
                         </tr>
                     </table>
                 </section>
@@ -65,7 +80,7 @@
             <section id="newgame" aria-labelledby="newgameheading">
                 <h2 id="newgameheading" class="accessibility">Neues Spiel</h2>
                 <form action="jeopardy" method="post">
-                    <input class="clickable orangelink contentlink" id="new_game" type="submit" name="restart" value="Neues Spiel" />
+                    <input class="clickable orangelink contentlink" id="new_game" type="submit" name="restart" value=@Messages("game.restart")/>
                 </form>
             </section>
         </div>

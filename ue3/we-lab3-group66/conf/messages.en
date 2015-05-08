@@ -42,6 +42,7 @@ game.access.points=Player Points
 game.access.category=Category
 game.lead=Leading Player
 game.second=Second PLayer
+game.restart=New Game
 game.player.you=(YOU)
 game.last.info=Last Game Info
 game.last=Last Game

@@ -42,6 +42,7 @@ game.access.points=Spielerpunkte
 game.access.category=Kategorie
 game.lead=Führender Spieler
 game.second=Zweiter Spieler
+game.restart=Neues Spiel
 game.player.you=(DU)
 game.last.info=Letztes Spielinfo
 game.last=Letztes Spiel
@@ -53,7 +54,7 @@ game.marvin.question=%s hat %s für %s gewählt.
 game.marvin.correct= hat richtig geantwortet: 
 game.marvin.wrong= hat falsch geantwortet: 
 game.human.correct=Du hast richtig geantwortet: 
-game.human.wrong=Du hast falsch geantwortet: 
+game.human.wrong=Du hast falsch geantwortet:
 
 question.type= für 
 question.answer=antworten

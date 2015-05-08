@@ -13,6 +13,7 @@ import play.mvc.Result;
 import views.html.authentication;
 import views.html.index;
 import views.html.registration;
+import views.html.winner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +35,19 @@ public class Application extends Controller {
         Question marvinQ = game.getMarvinPlayer().getChosenQuestion();
         DynamicForm requestData = Form.form().bindFromRequest();
 
-        String[] answers = requestData.get("answers").split(",");
+        //Wenn keine Antwort gewählt wurde
+        String[] answers;
+        if(requestData.get("answers") != null) {
+            answers = requestData.get("answers").split(",");
+        } else {
+            answers = new String[0];
+        }
         List<Integer> ids = new ArrayList<>();
 
         for (String s : answers) {
             ids.add(Integer.parseInt(s));
         }
-
         game.answerHumanQuestion(ids);
-
         /* TODO: die hier miteinbeziehen
         game.isRoundStart(); // check if we are at the beginning of a new round
         game.isAnswerPending(); // check if the current question needs to be answered
@@ -50,6 +55,10 @@ public class Application extends Controller {
         game.getWinner(); // winner of round or null if no winner exists yet
         */
         Cache.set("game", game);
+        if(game.isGameOver()){
+            return ok(views.html.winner.render((JeopardyGame) Cache.get("game"), marvinQ));
+        }
+
 
 		return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game"), marvinQ));
 	}
@@ -92,7 +101,6 @@ public class Application extends Controller {
     @play.db.jpa.Transactional
     public static Result submitUser(){
         DynamicForm requestData = Form.form().bindFromRequest();
-
         Loginuser u = new Loginuser();
         u.setUsername(requestData.get("username"));
         u.setPassword(requestData.get("password"));
@@ -124,10 +132,23 @@ public class Application extends Controller {
 
             return ok(authentication.render(""));
         }
-
-
-
     }
-	
+
+    public static Result logout(){
+        Cache.remove("game");
+        return ok(authentication.render(""));
+    }
+
+
+    public static Result newGame(){
+        JeopardyGame game = (JeopardyGame) Cache.get("game");
+        User player = game.getHuman();
+        Cache.remove("game");
+
+        JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
+        JeopardyGame newgame = factory.createGame(player);
+        Cache.set("game",newgame);
+        return ok(views.html.jeopardy.render(newgame, null));
+    }
 	
 }
