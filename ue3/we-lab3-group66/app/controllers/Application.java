@@ -10,7 +10,12 @@ import play.db.jpa.JPA;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.authentication;
+import views.html.index;
+import views.html.registration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Application extends Controller {
 
@@ -25,12 +30,38 @@ public class Application extends Controller {
 
 	
 	public static Result jeopardy(){
-		return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game")));
+        JeopardyGame game = (JeopardyGame) Cache.get("game");
+        Question marvinQ = game.getMarvinPlayer().getChosenQuestion();
+        DynamicForm requestData = Form.form().bindFromRequest();
+
+        String[] answers = requestData.get("answers").split(",");
+        List<Integer> ids = new ArrayList<>();
+
+        for (String s : answers) {
+            ids.add(Integer.parseInt(s));
+        }
+
+        game.answerHumanQuestion(ids);
+
+        /* TODO: die hier miteinbeziehen
+        game.isRoundStart(); // check if we are at the beginning of a new round
+        game.isAnswerPending(); // check if the current question needs to be answered
+        game.isGameOver(); // check if game is over
+        game.getWinner(); // winner of round or null if no winner exists yet
+        */
+        Cache.set("game", game);
+
+		return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game"), marvinQ));
 	}
 
 	public static Result question(){
+        JeopardyGame game = (JeopardyGame) Cache.get("game");
         DynamicForm requestData = Form.form().bindFromRequest();
-        return ok(question.render());
+        int questionID = Integer.parseInt(requestData.get("question_selection"));
+        game.getCategories();
+        game.chooseHumanQuestion(questionID);
+        Cache.set("game", game);
+        return ok(views.html.question.render(game, game.getHumanPlayer().getChosenQuestion()));
     }
 
     public static Result register(){
@@ -52,8 +83,7 @@ public class Application extends Controller {
             user.setAvatar(Avatar.getAvatar(getLoginuser.getAvatar()));
             JeopardyGame game = factory.createGame(user);
             Cache.set("game",game);
-
-            return ok(views.html.jeopardy.render(game));
+            return ok(views.html.jeopardy.render(game, null));
         } else {
             return ok(authentication.render(Messages.get("login.error")));
         }

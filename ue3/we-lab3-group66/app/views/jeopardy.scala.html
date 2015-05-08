@@ -1,5 +1,4 @@
-@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame)
-@import at.ac.tuwien.big.we15.lab2.api.Category
+@(game: at.ac.tuwien.big.we15.lab2.api.JeopardyGame)(marvinQ: at.ac.tuwien.big.we15.lab2.api.Question)
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
@@ -35,41 +34,64 @@
                 <h2 id="gameinfoinfoheading" class="accessibility">@Messages("game.access.information")</h2>
                 <section id="firstplayer" class="playerinfo leader" aria-labelledby="firstplayerheading">
                     <h3 id="firstplayerheading" class="accessibility">@Messages("game.lead")</h3>
-                    <img class="avatar" src="img/avatar/black-widow_head.png" alt="Spieler-Avatar Black Widow" />
+                    <img class="avatar" src="public/images/avatar/@game.getLeader().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getLeader().getUser().getAvatar().getName()" />
                     <table>
                         <tr>
                             <th class="accessibility">@Messages("game.access.name")</th>
-                            <td class="playername">Black Widow (Du)</td>
+                            @if(game.getLeader().getUser().getAvatar().getId().equals(game.getHumanPlayer().getUser().getAvatar().getId())) {
+                                <td class="playername">@game.getLeader().getUser().getAvatar().getName() @Messages("game.player.you")</td>
+                            } else {
+                                <td class="playername">@game.getLeader().getUser().getAvatar().getName()</td>
+                            }
                         </tr>
                         <tr>
                             <th class="accessibility">@Messages("game.access.points")</th>
-                            <td class="playerpoints">2000 �</td>
+                            <td class="playerpoints">@game.getLeader().getProfit() €</td>
                         </tr>
                     </table>
                 </section>
                 <section id="secondplayer" class="playerinfo" aria-labelledby="secondplayerheading">
                     <h3 id="secondplayerheading" class="accessibility">@Messages("game.second")</h3>
-                    <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
+                    <img class="avatar" src="public/images/avatar/@game.getSecond().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getSecond().getUser().getAvatar().getName()" />
                     <table>
                         <tr>
                             <th class="accessibility">@Messages("game.access.name")</th>
-                            <td class="playername">Deadpool</td>
+                            @if(game.getSecond().getUser().getAvatar().getId().equals(game.getHumanPlayer().getUser().getAvatar().getId())) {
+                                <td class="playername">@game.getSecond().getUser().getAvatar().getName() @Messages("game.player.you")</td>
+                            } else {
+                                <td class="playername">@game.getSecond().getUser().getAvatar().getName()</td>
+                            }
                         </tr>
                         <tr>
                             <th class="accessibility">@Messages("game.access.points")</th>
-                            <td class="playerpoints">400 �</td>
+                            <td class="playerpoints">@game.getSecond().getProfit() €</td>
                         </tr>
                     </table>
                 </section>
-                <p id="round">@Messages("game.questions"): 2 / 10</p>
+                <p id="round">@Messages("game.questions"): @game.getHumanPlayer().getAnsweredQuestions().size() / @game.getMaxQuestions()</p>
             </section>
 
                 <!-- Question -->
             <section id="question-selection" aria-labelledby="questionheading">
                 <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-                <p class="user-info positive-change">Du hast richtig geantwortet: +1000 �</p>
-                <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 �</p>
-                <p class="user-info">Deadpool hat TUWIEN f�r � 1000 gew�hlt.</p>
+                @if(game.getHumanPlayer().hasAnsweredQuestion()) {
+                    @if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() > 0) {
+                        <p class="user-info positive-change">@Messages("game.human.correct") @game.getHumanPlayer().getLatestProfitChange().toString() € </p>
+                    } else {@if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() < 0) {
+                        <p class="user-info negative-change">@Messages("game.human.wrong") -@game.getHumanPlayer().getLatestProfitChange().toString() €</p>
+                    }}
+                }
+                @if(marvinQ != null) {
+                    @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() > 0) {
+                        <p class="user-info positive-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.correct") @game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                    } else { @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() < 0) {
+                        <p class="user-info negative-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.wrong") -@game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                    }}
+                    @if(marvinQ != null) {
+                        <p class="user-info">@Messages("game.marvin.question", game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + "€")</p>
+                    }
+                }
+
                 <form id="questionform" action="question" method="post">
                     <fieldset>
                         <legend class="accessibility">@Messages("game.questions.choice")</legend>
@@ -79,12 +101,11 @@
                                 <ol class="category_questions">
                                     @for(q <- c.getQuestions()) {
                                         @if(game.hasBeenChosen(q)) {
-                                            <li><input name="question_selection" id="question_@q.getId()" value="@q.getValue()" type="radio" disabled="disabled" /><label class="tile clickable" for="question_@q.getId()">� @q.getValue()</label></li>
+                                            <li><input name="question_selection" id="@q.getId()" value="@q.getId()" type="radio" disabled="disabled" /><label class="tile clickable" for="@q.getId()">€ @q.getValue()</label></li>
                                         } else {
-                                            <li><input name="question_selection" id="question_@q.getId()" value="@q.getValue()" type="radio" /><label class="tile clickable" for="question_@q.getId()">� @q.getValue()</label></li>
+                                            <li><input name="question_selection" id="@q.getId()" value="@q.getId()" type="radio" /><label class="tile clickable" for="@q.getId()">€ @q.getValue()</label></li>
                                         }
                                     }
-
                                 </ol>
                             </section>
                         }

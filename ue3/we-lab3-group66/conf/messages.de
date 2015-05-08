@@ -50,11 +50,11 @@ game.choose=wählen
 game.questions=Fragen
 game.questions.choice=Fragenauswahl
 game.marvin.question=%s hat %s für %s gewählt.
-game.marvin.correct=%s hat richtig geantwortet: %s
-game.marvin.wrong=%s hat falsch geantwortet: -%s
-game.human.correct=Du hast richtig geantwortet: %s
-game.human.wrong=Du hast falsch geantwortet: -%s
+game.marvin.correct= hat richtig geantwortet: 
+game.marvin.wrong= hat falsch geantwortet: 
+game.human.correct=Du hast richtig geantwortet: 
+game.human.wrong=Du hast falsch geantwortet: 
 
-question.type=%s für %s
+question.type= für 
 question.answer=antworten
 question.timer=Verbleibende Zeit:
