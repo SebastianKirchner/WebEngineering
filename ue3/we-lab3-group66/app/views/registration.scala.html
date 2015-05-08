@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+@(usernameValid: Boolean)(passwordValid: Boolean)(birthdateValid: Boolean)(userExistsValid: Boolean)
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
     <head>
@@ -43,7 +43,10 @@
 
                     <label for="birthdate">@Messages("register.birth"):</label>
                     <input id="birthdate" type="date" name="birthdate"/>
-                    <div id="error_msg_birthdate" class="hide" role="alert">@Messages("register.error.date")</div>
+
+                    @if(!birthdateValid) {
+                        <div id="error_msg_birthdate" class="hide" role="alert">@Messages("register.error.date")</div>
+                    }
 
                     <label>@Messages("register.gender"):</label>
                     <fieldset class="inputset">
@@ -102,14 +105,20 @@
                         <option value="war-machine">War Machine</option>
                         <option value="wolverine">Wolverine</option>
                     </select>
-
                     <label for="username">@Messages("login.user")*:</label>
                     <input id="username" type="text" required="required" pattern="\w{4,8}" name="username"/>
-                    <div id="error_msg_username" class="hide" role="alert">@Messages("register.error.user")</div>
-
+                    @if(!usernameValid) {
+                        <div id="error_msg_username" class="hide" role="alert">@Messages("register.error.user")</div>
+                    }
+                    @if(!userExistsValid) {
+                        <div id="error_msg_username" role="alert">
+                           Benutzername schon vergeben, bitte einen anderen wählen.</div>
+                    }
                     <label for="password">@Messages("login.password")*:</label>
                     <input id="password" type="password" required="required" pattern="\w{4,8}" name="password"/>
-                    <div id="error_msg_password" class="hide" role="alert">@Messages("register.error.password")</div>
+                    @if(!passwordValid) {
+                        <div id="error_msg_password" class="hide" role="alert">@Messages("register.error.password")</div>
+                    }
                     <input class="greenlink formlink" type="submit" value="@Messages("register.register")" accesskey="s"/>
                     <p id="requiredhint">@Messages("register.required")</p>
                 </fieldset>
@@ -119,146 +128,6 @@
             <!-- Footer -->
         <footer role="contentinfo">© 2015 BIG Jeopardy</footer>
 
-        <script type="text/javascript">
-        //<![CDATA[
 
-        $(document).ready(function() {
-        if (areAllFieldsValid()) {
-        $('input[type="submit"]').removeAttr('disabled');
-        }else{
-        $('input[type="submit"]').attr('disabled', 'disabled');
-        }
-        });
-
-        function areAllFieldsValid() {
-        var valid;
-        if(hasFormValidation()){
-        valid = $('form')[0].checkValidity();
-        }else{
-        valid = !(isUsernameInvalid($("#username").val()) || isPasswordInvalid($("#password").val()));
-        }
-        if(!hasNativeDateInput()){
-        valid = valid && !isBirthdayInvalid("birthdate");
-        }
-        return valid;
-        }
-
-        function updateSubmitState() {
-        if (areAllFieldsValid()) {
-        $('input[type="submit"]').removeAttr('disabled');
-        }else{
-        $('input[type="submit"]').attr('disabled', 'disabled');
-        }
-        }
-
-        function updateFieldValidity(isInvalid, fieldSelector, messageSelector) {
-        if(isInvalid) {
-        $(fieldSelector).addClass('error');
-        $(messageSelector).removeClass('hide');
-        } else {
-        $(fieldSelector).removeClass('error');
-        $(messageSelector).addClass('hide');
-        }
-        }
-
-        /*
-         * Birth Date
-         */
-        $("#birthdate").keyup(function (event) {
-        if(hasFormValidation()){
-        this.setCustomValidity("");
-        }
-
-        var isInvalid;
-        if(!hasFormValidation() || !hasNativeDateInput()){
-        isInvalid = isBirthdayInvalid("birthdate");
-        }else{
-        isInvalid = !this.validity.valid;
-        }
-
-        updateFieldValidity(isInvalid, "#birthdate", "#error_msg_birthdate");
-        updateSubmitState();
-        });
-
-        /*
-         * Checks if the input with the given id is a valid birthdate or not
-         */
-        function isBirthdayInvalid(id){
-        re = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/;
-        value = getNormalizedDateString("#"+id);
-        console.log(value);
-        if (value != '') {
-        if (regs = value.match(re)) {
-        if (regs[1] < 1 || regs[1] > 31) {
-        return true;
-        }
-        if (regs[2] < 1 || regs[2] > 12) {
-        return true;
-        }
-        if (regs[3] < 1902 || regs[3] > (new Date()).getFullYear() + 100) {
-        return true;
-        }
-        return false;
-        }else{
-        return true;
-        }
-        } else {
-        return false;
-        }
-        }
-
-        /*
-         * User Name
-         */
-        $("#username").keyup(function (event){
-        if(hasFormValidation()){
-        this.setCustomValidity("");
-        }
-
-        var isInvalid;
-        if(!hasFormValidation()){
-        isInvalid = isUsernameInvalid($(event.target).val());
-        }else{
-        isInvalid = !this.validity.valid;
-        }
-
-        updateFieldValidity(isInvalid, "#username", "#error_msg_username");
-        updateSubmitState();
-        });
-
-        /*
-         *  checks if the given input value is a valid username or not
-         */
-        function isUsernameInvalid(value) {
-        return value.length < 4 || value.length > 8;
-        }
-
-        /*
-         * Password
-         */
-        $("#password").keyup(function (event){
-        if(hasFormValidation()){
-        this.setCustomValidity("");
-        }
-
-        var isInvalid;
-        if(!hasFormValidation()){
-        isInvalid = isPasswordInvalid($(event.target).val());
-        }else{
-        isInvalid = !this.validity.valid;
-        }
-
-        updateFieldValidity(isInvalid, "#password", "#error_msg_password");
-        updateSubmitState();
-        });
-
-        /*
-         *   checks if the given input value is a valid username or not
-         */
-        function isPasswordInvalid(value) {
-        return value.length < 4 || value.length > 8;
-        }
-        //]]>
-        </script>
     </body>
 </html>
