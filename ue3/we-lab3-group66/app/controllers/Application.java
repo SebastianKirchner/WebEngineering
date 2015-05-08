@@ -57,6 +57,7 @@ public class Application extends Controller {
             user.setAvatar(Avatar.getAvatar(a.getAvatar()));
             JeopardyGame game = factory.createGame(user);
             Player human = game.getHumanPlayer();
+
             return ok(jeopardy.render());
         } else {
             return ok(authentication.render("Benutzername oder Passwort falsch"));
