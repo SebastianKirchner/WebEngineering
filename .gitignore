@@ -44,3 +44,8 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+# ue3 play framework specific
+ue3/we-lab3-group66/build.sbt
+ue3/we-lab3-group66/project/
+ue3/we-lab3-group66/.sbtserver/
