@@ -1,6 +1,5 @@
 package controllers;
 
-
 import at.ac.tuwien.big.we15.lab2.api.*;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser;
@@ -26,10 +25,11 @@ public class Application extends Controller {
 
 	
 	public static Result jeopardy(){
-		return ok(jeopardy.render());
+		return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game")));
 	}
 
 	public static Result question(){
+        DynamicForm requestData = Form.form().bindFromRequest();
         return ok(question.render());
     }
 
@@ -53,7 +53,7 @@ public class Application extends Controller {
             JeopardyGame game = factory.createGame(user);
             Cache.set("game",game);
 
-            return ok(jeopardy.render());
+            return ok(views.html.jeopardy.render(game));
         } else {
             return ok(authentication.render(Messages.get("login.error")));
         }
