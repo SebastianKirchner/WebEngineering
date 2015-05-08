@@ -1,20 +1,15 @@
 package controllers;
 
 
+import at.ac.tuwien.big.we15.lab2.api.*;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.db.jpa.JPA;
 import play.i18n.Messages;
-import play.mvc.*;
-import at.ac.tuwien.big.we15.lab2.api.*;
-
+import play.mvc.Controller;
+import play.mvc.Result;
 import views.html.*;
-
-import javax.annotation.RegEx;
-
-import static play.data.Form.*;
 
 public class Application extends Controller {
 
