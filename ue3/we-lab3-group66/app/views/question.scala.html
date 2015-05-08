@@ -79,7 +79,8 @@
                     <p id="questiontext">@question.getText()</p>
                     <ul id="answers">
                         @for(answer <- question.getAllAnswers()) {
-                            <li><input name="answers" id="@answer.getId()" value="@answer.getId()" type="checkbox"/><label class="tile clickable" for="@answer.getId()">@answer.getText()</label></li>
+
+                            <li><input name="answers@answer.getId" id="@answer.getId()" value="@answer.getId()" type="checkbox"/><label class="tile clickable" for="@answer.getId()">@answer.getText()</label></li>
                         }
                     </ul>
                     <input id="timeleftvalue" type="hidden" value="100"/>

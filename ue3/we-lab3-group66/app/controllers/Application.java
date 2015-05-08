@@ -16,7 +16,9 @@ import views.html.registration;
 import views.html.winner;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Application extends Controller {
 
@@ -34,19 +36,23 @@ public class Application extends Controller {
         JeopardyGame game = (JeopardyGame) Cache.get("game");
         Question marvinQ = game.getMarvinPlayer().getChosenQuestion();
         DynamicForm requestData = Form.form().bindFromRequest();
+        Map<String,String> map = requestData.data();
 
-        //Wenn keine Antwort gewählt wurde
-        String[] answers;
-        if(requestData.get("answers") != null) {
-            answers = requestData.get("answers").split(",");
-        } else {
-            answers = new String[0];
+
+        List<String> answer = new ArrayList<>();
+        //Herauslesen der gewählten Antworten
+        for(Map.Entry<String,String> s : map.entrySet()){
+            if(s.getKey().contains("answers")){
+                answer.add(s.getValue());
+            }
         }
+
         List<Integer> ids = new ArrayList<>();
 
-        for (String s : answers) {
+        for (String s : answer) {
             ids.add(Integer.parseInt(s));
         }
+
         game.answerHumanQuestion(ids);
         /* TODO: die hier miteinbeziehen
         game.isRoundStart(); // check if we are at the beginning of a new round
@@ -56,11 +62,9 @@ public class Application extends Controller {
         */
         Cache.set("game", game);
         if(game.isGameOver()){
-            return ok(views.html.winner.render((JeopardyGame) Cache.get("game"), marvinQ));
+          return ok(views.html.winner.render((JeopardyGame) Cache.get("game"), marvinQ));
         }
-
-
-		return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game"), marvinQ));
+        return ok(views.html.jeopardy.render((JeopardyGame) Cache.get("game"), marvinQ));
 	}
 
 	public static Result question(){

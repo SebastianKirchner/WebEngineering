@@ -1,7 +1,11 @@
-@(i: String)(j: Boolean)
+@(i: java.util.Map[String,String])
+@import java.util.Map._
+
+
+    @for(m <- i){
+        @m
+    }
 
 
 
-    @i
-    @j
 
