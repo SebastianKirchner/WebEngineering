@@ -11,12 +11,12 @@
     game.checkRound();
 
     if (!game.simulateRound(request.getParameter("questionId"), request.getParameterValues("answers"))) {
-        if (game.getCurrentRound() < 3) {
+        if (game.getCurrentRound() < 10) {
             response.setIntHeader("Refresh", 0); // 2nd parameter is the seconds until site is refreshed, keep it small so player can't take action but change is visible}
         }
     }
 
-    if (game.getCurrentRound() >= 3) {
+    if (game.getCurrentRound() >= 10) {
         game.checkRound();
         request.getRequestDispatcher("/winner.jsp").forward(request, response);
     }
