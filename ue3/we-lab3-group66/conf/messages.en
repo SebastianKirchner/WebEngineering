@@ -1,1 +1,61 @@
 json.file = data.en.json
+
+authentication.title=Business Informatics Group Jeopardy! - Sign In
+jeopardy.title=Business Informatics Group Jeopardy! - Choose Question
+question.title=Business Informatics Group Jeopardy! - Answer Question
+register.title=Business Informatics Group Jeopardy! - Sign Up
+
+accessability.clicktoregister=Click here to register
+accessability.jumptosignin=Jump to Sign In
+accessability.jumptoquestions=Jump to questions
+accessability.jumptosignup=Jump to Sign Up
+accessability.logoff=Click here to Sign In
+
+login=Login
+login.user=Username
+login.password=Password
+login.login=Sign In
+login.notregistered=Not registered?
+login.goregister=Sign Up
+login.logoff=Sign Out
+login.error=Wrong Username or Password
+
+register.personal=Personal Data
+register.first=First Name
+register.last=Family Name
+register.birth=Birthday
+register.gender=Sex
+register.male=Male
+register.female=Female
+register.player=Player Data
+register.avatar=Avatar
+register.required=The fields with "*" are mandatory fields
+register.register=Sign Up
+register.registration=Registration
+register.error.user=Username has to be at least 4 and at maximum 8 characters long.
+register.error.password=Password has to be at least 4 and at maximum 8 characters long.
+register.error.date=Please use the following format for dates: dd.mm.yyyy (e.g. 24.12.2010).
+
+game.access.information=Game Information
+game.access.name=Player Name
+game.access.points=Player Points
+game.access.category=Category
+game.lead=Leading Player
+game.second=Second PLayer
+game.player.you=(YOU)
+game.last.info=Last Game Info
+game.last=Last Game
+game.last.never=Never
+game.choose=choose
+game.questions=Questions
+game.questions.choice=Choose Questions
+game.marvin.question=%s chose %s for %s.
+game.marvin.correct=%s chose correctly: %s
+game.marvin.wrong=%s chose wrong: -%s
+game.human.correct=You chose correctly: %s
+game.human.wrong=You chose wrong: -%s
+
+question.type=%s for %s
+question.answer=answer
+question.timer=Time left:
+

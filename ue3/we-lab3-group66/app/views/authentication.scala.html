@@ -4,15 +4,15 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Business Informatics Group Jeopardy! - Login</title>
+        <title>@Messages("authentication.title")</title>
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/base.css")" />
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/screen.css")" />
     </head>
 
     <body id="login-page">
-        <a class="accessibility" href="#login">Zum Login springen</a>
-        <a class="accessibility" title="Klicke hier um dich zu registrieren" href="register" accesskey="r">
-                Registrieren</a>
+        <a class="accessibility" href="#login">@Messages("accessability.jumptosignin")</a>
+        <a class="accessibility" title="@Messages("accessability.clicktoregister")" href="register" accesskey="r">
+                @Messages("login.goregister")</a>
             <!-- Header -->
         <header role="banner" aria-labelledby="bannerheading">
             <h1 id="bannerheading">
@@ -23,15 +23,15 @@
             <!-- Content -->
         <div role="main">
             <section id="login" aria-labelledby="loginheading">
-                <h2 id="loginheading" class="accessibility">Login</h2>
+                <h2 id="loginheading" class="accessibility">@Messages("login")</h2>
                 <form action="loginsubmit" method="post">
                     <fieldset>
-                        <legend id="logindata">Login</legend>
-                        <label for="username">Benutzername:</label>
+                        <legend id="logindata">@Messages("login")</legend>
+                        <label for="username">@Messages("login.user"):</label>
                         <input name="username" id="username" type="text" required="required"/>
-                        <label for="password">Passwort:</label>
+                        <label for="password">@Messages("login.password"):</label>
                         <input name="password" id="password" type="password" required="required"/>
-                        <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value="Anmelden"/>
+                        <input name="login" id="loginsubmit" class="greenlink formlink clickable" type="submit" value="@Messages("login.login")"/>
 
                     </fieldset>
                     @message
@@ -39,10 +39,10 @@
             </section>
                 <!-- Register section -->
             <section id="registerforward" aria-labelledby="registerheading">
-                <h2 id="registerheading" class="accessibility">Registrierung</h2>
-                <p id="registerhint">Nicht registriert?</p>
-                <a class="contentlink orangelink" title="Klicke hier um dich zu registrieren" href="register" accesskey="r">
-                        Zur Registrierung</a>
+                <h2 id="registerheading" class="accessibility">@Messages("register.register")</h2>
+                <p id="registerhint">@Messages("login.notregistered")</p>
+                <a class="contentlink orangelink" title="@Messages("accessability.clicktoregister")" href="register" accesskey="r">
+                        @Messages("login.goregister")</a>
             </section>
         </div>
 

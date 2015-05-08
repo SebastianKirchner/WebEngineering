@@ -59,7 +59,7 @@ public class Application extends Controller {
             Player human = game.getHumanPlayer();
             return ok(jeopardy.render());
         } else {
-            return ok(authentication.render("Benutzername oder Passwort falsch"));
+            return ok(authentication.render(Messages.get("login.error")));
         }
     }
 

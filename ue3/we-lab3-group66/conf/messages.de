@@ -1,1 +1,60 @@
 json.file = data.de.json
+
+authentication.title=Business Informatics Group Jeopardy! - Login
+jeopardy.title=Business Informatics Group Jeopardy! - Fragenauswahl
+question.title=Business Informatics Group Jeopardy! - Fragenbeantwortung
+register.title=Business Informatics Group Jeopardy! - Registrieren
+
+accessability.clicktoregister=Klicke hier um dich zu registrieren
+accessability.jumptosignin=Zum Login springen
+accessability.jumptoquestions=Zur Fragenauswahl springen
+accessability.jumptosignup=Zur Registrierung springen
+accessability.logoff=Klicke hier um dich abzumelden
+
+login=Login
+login.user=Benutzername
+login.password=Passwort
+login.login=Anmelden
+login.notregistered=Nicht registriert?
+login.goregister=Zur Registrierung
+login.logoff=Abmelden
+login.error=Benutzername oder Passwort falsch
+
+register.personal=Persönliche Daten
+register.first=Vorname
+register.last=Familienname
+register.birth=Geburtstag
+register.gender=Geschlecht
+register.male=Männlich
+register.female=Weiblich
+register.player=Spielerdaten
+register.avatar=Avatar
+register.required=Mit "*" gekennzeichnete Felder sind Pflichtfelder
+register.register=Registrieren
+register.registration=Registrierung
+register.error.user=Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.
+register.error.password=Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.
+register.error.date=Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2010).
+
+game.access.information=Spielinformationen
+game.access.name=Spielername
+game.access.points=Spielerpunkte
+game.access.category=Kategorie
+game.lead=Führender Spieler
+game.second=Zweiter Spieler
+game.player.you=(DU)
+game.last.info=Letztes Spielinfo
+game.last=Letztes Spiel
+game.last.never=Nie
+game.choose=wählen
+game.questions=Fragen
+game.questions.choice=Fragenauswahl
+game.marvin.question=%s hat %s für %s gewählt.
+game.marvin.correct=%s hat richtig geantwortet: %s
+game.marvin.wrong=%s hat falsch geantwortet: -%s
+game.human.correct=Du hast richtig geantwortet: %s
+game.human.wrong=Du hast falsch geantwortet: -%s
+
+question.type=%s für %s
+question.answer=antworten
+question.timer=Verbleibende Zeit:
