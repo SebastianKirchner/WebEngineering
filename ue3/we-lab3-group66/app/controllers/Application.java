@@ -6,6 +6,7 @@ import at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.JPA;
+import play.i18n.Messages;
 import play.mvc.*;
 import at.ac.tuwien.big.we15.lab2.api.*;
 
@@ -54,20 +55,14 @@ public class Application extends Controller {
 
         if(a != null ){
 
-            JeopardyFactory factory = new PlayJeopardyFactory("E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/conf/data.de.json");
+            JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
 
             User user = new SimpleUser();
             user.setName(a.getUsername());
             user.setAvatar(Avatar.getAvatar(a.getAvatar()));
-            Boolean boo = user == null;
-            return ok(Test.render(boo));
-            //JeopardyGame game = factory.createGame(user);
-
-            //Player human = game.getHumanPlayer();
-
-
-
-            //return ok(jeopardy.render());
+            JeopardyGame game = factory.createGame(user);
+            Player human = game.getHumanPlayer();
+            return ok(jeopardy.render());
         } else {
             return ok(authentication.render("Benutzername oder Passwort falsch"));
         }

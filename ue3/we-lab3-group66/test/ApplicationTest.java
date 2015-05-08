@@ -7,6 +7,7 @@ import at.ac.tuwien.big.we15.lab2.api.impl.SimpleUser;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -25,12 +26,12 @@ public class ApplicationTest {
 
     @Test
     public void factory(){
-        JeopardyFactory factory = new PlayJeopardyFactory("E:/IntelliJProjects/WebEngineeringMaven/ue3/we-lab3-group66/conf/data.de.json");
-
+        JeopardyFactory factory = new PlayJeopardyFactory("conf.data.de.json");
         User user = new SimpleUser();
         user.setName("Dave");
         user.setAvatar(Avatar.BEETLE);
         JeopardyGame game = factory.createGame(user);
+        assertTrue(game.getCategories().size() != 0);
         int a = 0;
 
     }
