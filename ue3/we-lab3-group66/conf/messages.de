@@ -37,6 +37,7 @@ register.registration=Registrierung
 register.error.user=Der Benutzername muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.
 register.error.password=Das Passwort muss mindestens 4 Zeichen und darf maximal 8 Zeichen enthalten.
 register.error.date=Verwenden Sie bitte folgendes Datumsformat: dd.mm.yyyy (z.B. 24.12.2010).
+register.error.user.used=Benutzername schon vergeben, bitte einen anderen wählen.
 
 game.access.information=Spielinformationen
 game.access.name=Spielername

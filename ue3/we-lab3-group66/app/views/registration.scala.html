@@ -111,8 +111,7 @@
                         <div id="error_msg_username" class="hide" role="alert">@Messages("register.error.user")</div>
                     }
                     @if(!userExistsValid) {
-                        <div id="error_msg_username" role="alert">
-                           Benutzername schon vergeben, bitte einen anderen wählen.</div>
+                        <div id="error_msg_username" role="alert"> @Messages("register.error.user.used")</div>
                     }
                     <label for="password">@Messages("login.password")*:</label>
                     <input id="password" type="password" required="required" pattern="\w{4,8}" name="password"/>
