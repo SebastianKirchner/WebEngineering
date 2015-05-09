@@ -76,19 +76,19 @@
                 <h2 id="questionheading" class="black accessibility">Jeopardy</h2>
                 @if(game.getHumanPlayer().hasAnsweredQuestion()) {
                     @if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() > 0) {
-                        <p class="user-info positive-change">@Messages("game.human.correct") @game.getHumanPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info positive-change">@Messages("game.human.correct").format(game.getHumanPlayer().getLatestProfitChange().toString() + " €" )</p>
                     } else {@if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() < 0) {
-                        <p class="user-info negative-change">@Messages("game.human.wrong") -@game.getHumanPlayer().getLatestProfitChange().toString() €</p>
+                        <p class="user-info negative-change">@Messages("game.human.wrong").format(game.getHumanPlayer().getLatestProfitChange().toString() + " €" )</p>
                     }}
                 }
                 @if(marvinQ != null) {
                     @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() > 0) {
-                        <p class="user-info positive-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.correct") @game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info positive-change">@Messages("game.marvin.correct").format(game.getMarvinPlayer().getUser().getAvatar().getName(), game.getMarvinPlayer().getLatestProfitChange().toString() + " €") </p>
                     } else { @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() < 0) {
-                        <p class="user-info negative-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.wrong") -@game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info negative-change">@Messages("game.marvin.wrong").format(game.getMarvinPlayer().getUser().getAvatar().getName(), game.getMarvinPlayer().getLatestProfitChange().toString() + " €") </p>
                     }}
                     @if(marvinQ != null) {
-                        <p class="user-info">@Messages("game.marvin.question", game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + "€")</p>
+                        <p class="user-info">@Messages("game.marvin.question").format(game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + " €")</p>
                     }
                 }
 

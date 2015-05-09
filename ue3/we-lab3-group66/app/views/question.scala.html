@@ -75,7 +75,7 @@
             <section id="question" aria-labelledby="questionheading">
                 <form id="questionform" action="jeopardy" method="get">
                     <h2 id="questionheading" class="accessibility">Frage</h2>
-                    <p id="questiontype">@question.getCategory().getName() @Messages("question.type") € @question.getValue().toString()</p>
+                    <p id="questiontype">@Messages("question.type").format(question.getCategory().getName(), "€ " + question.getValue().toString())</p>
                     <p id="questiontext">@question.getText()</p>
                     <ul id="answers">
                         @for(answer <- question.getAllAnswers()) {

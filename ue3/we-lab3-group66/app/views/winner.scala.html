@@ -4,14 +4,14 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Business Informatics Group Jeopardy! - Gewinnanzeige</title>
+        <title>@Messages("winner.title")</title>
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/base.css")" />
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/screen.css")" />
         <script src="@routes.Assets.at("javascripts/jquery.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/framework.js")" type="text/javascript"></script>
     </head>
     <body id="winner-page">
-        <a class="accessibility" href="#winner">Zur Gewinnanzeige springen</a>
+        <a class="accessibility" href="#winner">@Messages("accessability.jumptoawards")</a>
             <!-- Header -->
         <header role="banner" aria-labelledby="bannerheading">
             <h1 id="bannerheading">
@@ -23,7 +23,7 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a class="orangelink navigationlink" id="logoutlink" title="Klicke hier um dich abzumelden" href="logout" accesskey="l">Abmelden</a></li>
+                <li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("accessability.logoff")" href="logout" accesskey="l">@Messages("login.logoff")</a></li>
             </ul>
         </nav>
 
@@ -33,42 +33,42 @@
                 <h2 id="winnerinfoheading" class="accessibility">Gewinnerinformationen</h2>
                 @if(game.getHumanPlayer().hasAnsweredQuestion()) {
                     @if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() > 0) {
-                        <p class="user-info positive-change">@Messages("game.human.correct") @game.getHumanPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info positive-change">@Messages("game.human.correct").format(game.getHumanPlayer().getLatestProfitChange().toString() + " €" )</p>
                     } else {@if(game.getHumanPlayer().getLatestProfitChange() != null &&  game.getHumanPlayer().getLatestProfitChange() < 0) {
-                        <p class="user-info negative-change">@Messages("game.human.wrong") -@game.getHumanPlayer().getLatestProfitChange().toString() €</p>
+                        <p class="user-info negative-change">@Messages("game.human.wrong").format(game.getHumanPlayer().getLatestProfitChange().toString() + " €" )</p>
                     }}
                 }
                 @if(marvinQ != null) {
                     @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() > 0) {
-                        <p class="user-info positive-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.correct") @game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info positive-change">@Messages("game.marvin.correct").format(game.getMarvinPlayer().getUser().getAvatar().getName(), game.getMarvinPlayer().getLatestProfitChange().toString() + " €") </p>
                     } else { @if(game.getMarvinPlayer().getLatestProfitChange() != null && game.getMarvinPlayer().getLatestProfitChange() < 0) {
-                        <p class="user-info negative-change">@game.getMarvinPlayer().getUser().getAvatar().getName() @Messages("game.marvin.wrong") -@game.getMarvinPlayer().getLatestProfitChange().toString() € </p>
+                        <p class="user-info negative-change">@Messages("game.marvin.wrong").format(game.getMarvinPlayer().getUser().getAvatar().getName(), game.getMarvinPlayer().getLatestProfitChange().toString() + " €") </p>
                     }}
                     @if(marvinQ != null) {
-                        <p class="user-info">@Messages("game.marvin.question", game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + "€")</p>
+                        <p class="user-info">@Messages("game.marvin.question").format(game.getMarvin().getAvatar().getName(), marvinQ.getCategory().getName(), marvinQ.getValue().toString() + " €")</p>
                     }
                 }
                 <section class="playerinfo leader" aria-labelledby="winnerannouncement">
-                    <h3 id="winnerannouncement">Gewinner: @game.getWinner().getUser().getName()</h3>
-                    <img class="avatar" src="public/images/avatar/@game.getWinner().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getWinner().getUser().getAvatar().getImageHead()" />
+                    <h3 id="winnerannouncement">@Messages("winner.winner"): @game.getWinner().getUser().getAvatar().getName()</h3>
+                    <img class="avatar" src="public/images/avatar/@game.getWinner().getUser().getAvatar().getImageFull()" alt="Spieler-Avatar @game.getWinner().getUser().getAvatar().getImageFull()" />
                     <table>
                         <tr>
                             <th class="accessibility">@Messages("game.access.name")</th>
-                            <td class="playername">@game.getWinner.getUser.getName()</td>
+                            <td class="playername">@game.getWinner().getUser().getAvatar().getName()</td>
                         </tr>
                         <tr>
-                            <th class="accessibility">Spielerpunkte</th>
+                            <th class="accessibility">@Messages("game.access.points")</th>
                             <td class="playerpoints">@game.getWinner().getProfit()</td>
                         </tr>
                     </table>
                 </section>
                 <section class="playerinfo" aria-labelledby="loserheading">
-                    <h3 id="loserheading" class="accessibility">Verlierer: @game.getSecond.getUser.getName</h3>
+                    <h3 id="loserheading" class="accessibility">@Messages("winner.loser"): @game.getSecond.getUser.getName</h3>
                     <img class="avatar" src="public/images/avatar/@game.getSecond().getUser().getAvatar().getImageHead()" alt="Spieler-Avatar @game.getSecond().getUser().getAvatar().getImageHead()" />
                     <table>
                         <tr>
                             <th class="accessibility">@Messages("game.access.name")</th>
-                            <td class="playername">@game.getSecond.getUser.getName</td>
+                            <td class="playername">@game.getSecond().getUser().getAvatar().getName()</td>
                         </tr>
                         <tr>
                             <th class="accessibility">@Messages("game.access.points")</th>
@@ -78,9 +78,9 @@
                 </section>
             </section>
             <section id="newgame" aria-labelledby="newgameheading">
-                <h2 id="newgameheading" class="accessibility">Neues Spiel</h2>
+                <h2 id="newgameheading" class="accessibility">@Messages("winner.restart")</h2>
                 <form action="jeopardy" method="post">
-                    <input class="clickable orangelink contentlink" id="new_game" type="submit" name="restart" value=@Messages("game.restart")/>
+                    <input class="clickable orangelink contentlink" id="new_game" type="submit" name="restart" value="@Messages("winner.restart")"/>
                 </form>
             </section>
         </div>

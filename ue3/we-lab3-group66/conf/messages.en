@@ -4,12 +4,14 @@ authentication.title=Business Informatics Group Jeopardy! - Sign In
 jeopardy.title=Business Informatics Group Jeopardy! - Choose Question
 question.title=Business Informatics Group Jeopardy! - Answer Question
 register.title=Business Informatics Group Jeopardy! - Sign Up
+winner.title=Business Informatics Group Jeopardy! - Winners Page
 
 accessability.clicktoregister=Click here to register
 accessability.jumptosignin=Jump to Sign In
 accessability.jumptoquestions=Jump to questions
 accessability.jumptosignup=Jump to Sign Up
 accessability.logoff=Click here to Sign In
+accessability.jumptoawards=Jump to awards
 
 login=Login
 login.user=Username
@@ -42,7 +44,6 @@ game.access.points=Player Points
 game.access.category=Category
 game.lead=Leading Player
 game.second=Second PLayer
-game.restart=New Game
 game.player.you=(YOU)
 game.last.info=Last Game Info
 game.last=Last Game
@@ -52,11 +53,14 @@ game.questions=Questions
 game.questions.choice=Choose Questions
 game.marvin.question=%s chose %s for %s.
 game.marvin.correct=%s chose correctly: %s
-game.marvin.wrong=%s chose wrong: -%s
+game.marvin.wrong=%s chose wrong: %s
 game.human.correct=You chose correctly: %s
-game.human.wrong=You chose wrong: -%s
+game.human.wrong=You chose wrong: %s
 
 question.type=%s for %s
 question.answer=answer
 question.timer=Time left:
 
+winner.restart=New Game
+winner.winner=Winner
+winner.loser=Loser
