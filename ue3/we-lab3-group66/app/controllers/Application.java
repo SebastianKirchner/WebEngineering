@@ -93,7 +93,7 @@ public class Application extends Controller {
             JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
             User user = new SimpleUser();
             user.setName(getLoginuser.getUsername());
-            user.setAvatar(Avatar.getAvatar(getLoginuser.getAvatar()));
+            user.setAvatar(getLoginuser.getAvatar());
             JeopardyGame game = factory.createGame(user);
             Cache.set("game",game);
             return ok(views.html.jeopardy.render(game, null));
@@ -111,7 +111,7 @@ public class Application extends Controller {
         u.setFirstname(requestData.get("firstname"));
         u.setSurname(requestData.get("lastname"));
         u.setGender(requestData.get("gender"));
-        u.setAvatar(requestData.get("avatar"));
+        u.setAvatar(Avatar.getAvatar(requestData.get("avatar")));
         u.setBirthdate(requestData.get("birthdate"));
 
         Loginuser sameUser = JPA.em().find(Loginuser.class,u.getUsername());

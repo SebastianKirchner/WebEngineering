@@ -1,5 +1,7 @@
 package controllers;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
+import at.ac.tuwien.big.we15.lab2.api.User;
 import play.db.jpa.JPA;
 
 import javax.persistence.*;
@@ -9,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Access(AccessType.FIELD)
-public class Loginuser {
+public class Loginuser implements User {
 
     public Loginuser() {
     }
@@ -51,11 +53,21 @@ public class Loginuser {
         this.gender = gender;
     }
 
-    public String getAvatar() {
+    @Override
+    public String getName() {
+        return username;
+    }
+
+    @Override
+    public void setName(String s) {
+        this.username = s;
+    }
+
+    public Avatar getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
     }
 
@@ -72,7 +84,7 @@ public class Loginuser {
 
     private String gender;
 
-    private String avatar;
+    private Avatar avatar;
 
 
     public String getUsername() {
