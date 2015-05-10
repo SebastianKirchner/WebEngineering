@@ -103,14 +103,14 @@
                                         @if(game.hasBeenChosen(q)) {
                                             <li><input name="question_selection" id="@q.getId()" value="@q.getId()" type="radio" disabled="disabled" /><label class="tile clickable" for="@q.getId()">€ @q.getValue()</label></li>
                                         } else {
-                                            <li><input name="question_selection" id="@q.getId()" value="@q.getId()" type="radio" /><label class="tile clickable" for="@q.getId()">€ @q.getValue()</label></li>
+                                            <li><input name="question_selection" id="question_@q.getId()" value="@q.getId()" type="radio" /><label class="tile clickable" for="question_@q.getId()" onclick="enableButton()">€ @q.getValue()</label></li>
                                         }
                                     }
                                 </ol>
                             </section>
                         }
                     </fieldset>
-                    <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="@Messages("game.choose")" accesskey="s" />
+                    <input class="greenlink formlink clickable" name="question_submit" id="next" type="submit" value="@Messages("game.choose")" accesskey="s" disabled="disabled" />
                 </form>
             </section>
 
@@ -141,6 +141,11 @@
         }
         }
         });
+
+        function enableButton() {
+                $("#next").prop("disabled", false);
+            }
+
         //]]>
         </script>
     </body>

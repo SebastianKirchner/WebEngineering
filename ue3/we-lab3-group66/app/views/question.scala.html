@@ -23,7 +23,7 @@
         <nav role="navigation" aria-labelledby="navheading">
             <h2 id="navheading" class="accessibility">Navigation</h2>
             <ul>
-                <li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("accessability.logoff")" href="logout" accesskey="l">@Messages("accessability.logoff")</a></li>
+                <li><a class="orangelink navigationlink" id="logoutlink" title="@Messages("accessability.logoff")" href="logout" accesskey="l">@Messages("login.logoff")</a></li>
             </ul>
         </nav>
 
@@ -80,7 +80,7 @@
                     <ul id="answers">
                         @for(answer <- question.getAllAnswers()) {
 
-                            <li><input name="answers@answer.getId" id="@answer.getId()" value="@answer.getId()" type="checkbox"/><label class="tile clickable" for="@answer.getId()">@answer.getText()</label></li>
+                            <li><input name="answers@answer.getId" id="answer_@answer.getId()" value="@answer.getId()" type="checkbox"/><label class="tile clickable" for="answer_@answer.getId()">@answer.getText()</label></li>
                         }
                     </ul>
                     <input id="timeleftvalue" type="hidden" value="100"/>
