@@ -103,11 +103,13 @@ public class Loginuser implements User {
         this.password = password;
     }
 
+    @play.db.jpa.Transactional
     public static Loginuser getLoginuser(String username){
 
         return JPA.em().find(Loginuser.class, username);
     }
 
+    @play.db.jpa.Transactional
     public static void saveLoginuser(Loginuser u){
         EntityManager em = JPA.em();
         em.persist(u);
