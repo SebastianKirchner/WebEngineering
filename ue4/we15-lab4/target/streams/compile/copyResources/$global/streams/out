@@ -1,0 +1,8 @@
+[debug] Copy resource mappings: 
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\application.conf,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\application.conf)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\data.json,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\data.json)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\messages.de,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\messages.de)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\messages.en,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\messages.en)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\META-INF,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\META-INF)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\routes,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\routes)
+[debug] 	(E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\conf\META-INF\persistence.xml,E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\target\scala-2.11\classes\META-INF\persistence.xml)

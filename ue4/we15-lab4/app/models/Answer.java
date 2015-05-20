@@ -1,7 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Represents an answer which is stored in the DB
@@ -9,8 +8,10 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Answer extends BaseEntity {
 
-
+    @Column(nullable = true, length = 255)
     private String textDE;
+
+    @Column(nullable = true, length = 255)
     private String textEN;
 
     private Boolean correctAnswer;

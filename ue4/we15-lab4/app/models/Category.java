@@ -14,7 +14,10 @@ import java.util.List;
 public class Category extends BaseEntity {
 
 
+    @Column(nullable = true, length = 255)
     private String nameDE;
+
+    @Column(nullable = true, length = 255)
     private String nameEN;
 
 

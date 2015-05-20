@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
@@ -13,9 +15,12 @@ import play.i18n.Messages;
 @Entity
 public class JeopardyUser extends BaseEntity {
 
+
+
 	public enum Gender {
 		male, female
 	}
+
 
 	@Constraints.Required
 	@Constraints.MinLength(value = 4, message = "error.userName")

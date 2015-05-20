@@ -3,6 +3,7 @@ package models;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import play.db.jpa.JPA;
@@ -58,7 +59,8 @@ public class JeopardyDAO implements IGameDAO {
     @Override
     public void persist(BaseEntity entity) {
         // TODO: Implement Method
-        throw new UnsupportedOperationException("Not yet implemented.");
+        em().persist(entity);
+        //throw new UnsupportedOperationException("Not yet implemented.");
     }
 
 
@@ -99,7 +101,10 @@ public class JeopardyDAO implements IGameDAO {
     @Override
     public <E extends BaseEntity> List<E> findEntities(Class<E> entityClazz) {
         // TODO: Implement Method
-        throw new UnsupportedOperationException("Not yet implemented.");
+
+
+        Query query = em().createQuery("select u from " + entityClazz.getSimpleName() + " u");
+        return query.getResultList();
     }
 
     /**

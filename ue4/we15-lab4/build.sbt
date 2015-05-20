@@ -18,3 +18,6 @@ libraryDependencies ++= Seq(
   "org.twitter4j" % "twitter4j-core" % "4.0.3", //Twitter4j API
   "org.apache.jena" % "apache-jena-libs" % "2.13.0" exclude("org.apache.httpcomponents", "httpclient")
 )
+
+
+fork in run := true

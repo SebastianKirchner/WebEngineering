@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 /**
  * Represents a question, which is stored in the DB
@@ -16,8 +12,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Question extends BaseEntity {
 
+
+    @Column(nullable = true, length = 255)
     private String textDE;
+
+    @Column(nullable = true, length = 255)
     private String textEN;
+
+    @Column(nullable = true, length = 255)
     private int value;
 
     //The category to which this question belongs to

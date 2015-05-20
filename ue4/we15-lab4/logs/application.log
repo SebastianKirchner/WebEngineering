@@ -1,0 +1,1109 @@
+2015-05-20 19:02:16,383 - [INFO] - from play in play-fork-run-akka.actor.default-dispatcher-2 
+Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+
+2015-05-20 19:02:55,437 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:02:55,620 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:02:56,666 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6m80h408f - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: property mapping has wrong number of columns: models.Answer.question type: models.Question
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:497) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:270) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:03:12,044 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:03:12,047 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:03:12,199 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:03:12,202 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:03:12,317 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6m80h4nco - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: Composite-id class must implement Serializable: models.Answer
+	at org.hibernate.mapping.RootClass.checkCompositeIdentifier(RootClass.java:290) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:279) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:03:23,537 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6m80h4nco - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: Composite-id class must implement Serializable: models.Answer
+	at org.hibernate.mapping.RootClass.checkCompositeIdentifier(RootClass.java:290) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:279) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:04:02,092 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:04:02,092 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:04:02,171 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:04:02,174 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:04:03,454 - [INFO] - from application in play-internal-execution-context-1 
+Data from: data.json
+
+2015-05-20 19:04:03,680 - [INFO] - from application in play-internal-execution-context-1 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:04:03,714 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-05-20 19:04:03,899 - [INFO] - from application in play-akka.actor.default-dispatcher-6 
+Go to login page.
+
+2015-05-20 19:04:11,391 - [INFO] - from application in play-internal-execution-context-2 
+Application shutdown...
+
+2015-05-20 19:04:11,480 - [INFO] - from play in play-internal-execution-context-2 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:04:11,484 - [INFO] - from play in play-internal-execution-context-2 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:04:11,772 - [INFO] - from application in play-internal-execution-context-2 
+Data from: data.json
+
+2015-05-20 19:04:11,865 - [INFO] - from application in play-internal-execution-context-2 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:04:11,876 - [INFO] - from play in play-internal-execution-context-2 
+Application started (Dev)
+
+2015-05-20 19:04:11,902 - [INFO] - from application in play-akka.actor.default-dispatcher-7 
+Go to login page.
+
+2015-05-20 19:04:20,507 - [INFO] - from application in play-internal-execution-context-2 
+Application shutdown...
+
+2015-05-20 19:04:20,551 - [INFO] - from play in play-internal-execution-context-2 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:04:20,554 - [INFO] - from play in play-internal-execution-context-2 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:04:20,639 - [ERROR] - from application in New I/O worker #1 
+
+
+! @6m80h8kej - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: Composite-id class must implement Serializable: models.Answer
+	at org.hibernate.mapping.RootClass.checkCompositeIdentifier(RootClass.java:290) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:279) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:04:47,785 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:04:47,785 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:04:47,831 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:04:47,834 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:04:48,088 - [INFO] - from application in play-internal-execution-context-1 
+Data from: data.json
+
+2015-05-20 19:04:48,168 - [INFO] - from application in play-internal-execution-context-1 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:04:48,175 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-05-20 19:04:48,204 - [INFO] - from application in play-akka.actor.default-dispatcher-4 
+Go to login page.
+
+2015-05-20 19:05:17,082 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:05:17,140 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:05:17,142 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:05:17,232 - [ERROR] - from application in New I/O worker #8 
+
+
+! @6m80hc079 - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: property mapping has wrong number of columns: models.Answer.question type: models.Question
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:497) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:270) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:05:25,300 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:05:25,301 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:05:25,340 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:05:25,343 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:05:25,425 - [ERROR] - from application in New I/O worker #8 
+
+
+! @6m80hccab - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: models.Question column: id (should be mapped with insert="false" update="false")
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:709) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.checkPropertyColumnDuplication(PersistentClass.java:731) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:753) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:506) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:270) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:05:30,539 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:05:30,540 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:05:30,602 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:05:30,605 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:05:30,710 - [ERROR] - from application in New I/O worker #8 
+
+
+! @6m80hck5j - Internal server error, for (GET) [/] ->
+
+play.api.UnexpectedException: Unexpected exception[PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:166) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) ~[scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) ~[scala-library-2.11.1.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: defaultPersistenceUnit] Unable to build Hibernate SessionFactory
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.persistenceException(EntityManagerFactoryBuilderImpl.java:1249) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.access$600(EntityManagerFactoryBuilderImpl.java:120) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:860) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:850) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:425) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:849) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47) ~[hibernate-jpa-2.0-api-1.0.1.Final.jar:1.0.1.Final]
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:38) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) ~[scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$.start(Play.scala:90) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157) ~[play_2.11-2.3.8.jar:2.3.8]
+	... 14 common frames omitted
+Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: models.Question column: id (should be mapped with insert="false" update="false")
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:709) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.checkPropertyColumnDuplication(PersistentClass.java:731) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:753) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:506) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:270) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.validate(Configuration.java:1360) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1851) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:857) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 31 common frames omitted
+
+2015-05-20 19:05:48,100 - [INFO] - from application in play-internal-execution-context-1 
+Application shutdown...
+
+2015-05-20 19:05:48,101 - [WARN] - from play in play-internal-execution-context-1 
+Error stopping plugin
+java.lang.NullPointerException: null
+	at play.libs.ws.ning.NingWSPlugin.onStop(NingWSPlugin.java:31) ~[play-java-ws_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:108) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1$$anonfun$apply$mcV$sp$2.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.collection.immutable.List.foreach(List.scala:383) [scala-library-2.11.1.jar:na]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply$mcV$sp(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1$$anonfun$apply$1.apply(Play.scala:107) [play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:106) [play_2.11-2.3.8.jar:2.3.8]
+	at play.api.Play$$anonfun$stop$1.apply(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.Play$.stop(Play.scala:105) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:142) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.util.Success.flatMap(Try.scala:230) [scala-library-2.11.1.jar:na]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+
+2015-05-20 19:05:48,163 - [INFO] - from play in play-internal-execution-context-1 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:05:48,165 - [INFO] - from play in play-internal-execution-context-1 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:05:48,411 - [INFO] - from application in play-internal-execution-context-1 
+Data from: data.json
+
+2015-05-20 19:05:48,486 - [INFO] - from application in play-internal-execution-context-1 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:05:48,491 - [INFO] - from play in play-internal-execution-context-1 
+Application started (Dev)
+
+2015-05-20 19:05:48,521 - [INFO] - from application in play-akka.actor.default-dispatcher-12 
+Go to login page.
+
+2015-05-20 19:05:50,441 - [INFO] - from application in play-akka.actor.default-dispatcher-18 
+Go to Registration page.
+
+2015-05-20 19:05:53,381 - [INFO] - from application in play-akka.actor.default-dispatcher-18 
+Registration info has been submitted.
+
+2015-05-20 19:05:53,650 - [INFO] - from application in play-akka.actor.default-dispatcher-18 
+Go to login page.
+
+2015-05-20 19:05:58,043 - [INFO] - from application in play-akka.actor.default-dispatcher-23 
+Login information has been provided.
+
+2015-05-20 19:05:58,324 - [INFO] - from application in play-akka.actor.default-dispatcher-23 
+[Dave] Play the game.
+
+2015-05-20 19:05:58,329 - [INFO] - from application in play-akka.actor.default-dispatcher-23 
+[Dave] Creating a new game.
+
+2015-05-20 19:05:58,331 - [ERROR] - from play in play-akka.actor.default-dispatcher-23 
+Cannot invoke the action, eventually got an error: java.lang.UnsupportedOperationException: Not yet implemented.
+
+2015-05-20 19:05:58,344 - [ERROR] - from application in play-akka.actor.default-dispatcher-23 
+
+
+! @6m80he92b - Internal server error, for (GET) [/jeopardy] ->
+
+play.api.Application$$anon$1: Execution exception[[UnsupportedOperationException: Not yet implemented.]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+Caused by: java.lang.UnsupportedOperationException: Not yet implemented.
+	at models.JeopardyDAO.findEntities(JeopardyDAO.java:103) ~[classes/:na]
+	at controllers.GameController.createNewGame(GameController.java:47) ~[classes/:2.3.8]
+	at controllers.GameController.createNewGame(GameController.java:38) ~[classes/:2.3.8]
+	at controllers.GameController.cachedGame(GameController.java:68) ~[classes/:2.3.8]
+	at controllers.GameController.playGame(GameController.java:94) ~[classes/:2.3.8]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.mvc.Security$AuthenticatedAction.call(Security.java:44) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:23) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:21) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.JPA.withTransactionAsync(JPA.java:180) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:18) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	... 6 common frames omitted
+
+2015-05-20 19:10:02,211 - [INFO] - from application in play-internal-execution-context-3 
+Application shutdown...
+
+2015-05-20 19:10:02,272 - [INFO] - from play in play-internal-execution-context-3 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:10:02,275 - [INFO] - from play in play-internal-execution-context-3 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:10:02,516 - [INFO] - from application in play-internal-execution-context-3 
+Data from: data.json
+
+2015-05-20 19:10:02,587 - [INFO] - from application in play-internal-execution-context-3 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:10:02,592 - [INFO] - from play in play-internal-execution-context-3 
+Application started (Dev)
+
+2015-05-20 19:10:02,622 - [INFO] - from application in play-akka.actor.default-dispatcher-24 
+[Dave] Play the game.
+
+2015-05-20 19:10:02,643 - [INFO] - from application in play-akka.actor.default-dispatcher-24 
+Go to login page.
+
+2015-05-20 19:10:03,993 - [INFO] - from application in play-akka.actor.default-dispatcher-24 
+Go to Registration page.
+
+2015-05-20 19:10:07,007 - [INFO] - from application in play-akka.actor.default-dispatcher-25 
+Registration info has been submitted.
+
+2015-05-20 19:10:07,033 - [INFO] - from application in play-akka.actor.default-dispatcher-26 
+Go to login page.
+
+2015-05-20 19:10:12,138 - [INFO] - from application in play-akka.actor.default-dispatcher-24 
+Login information has been provided.
+
+2015-05-20 19:10:12,187 - [INFO] - from application in play-akka.actor.default-dispatcher-26 
+[Dave] Play the game.
+
+2015-05-20 19:10:12,190 - [INFO] - from application in play-akka.actor.default-dispatcher-26 
+[Dave] Creating a new game.
+
+2015-05-20 19:10:12,197 - [INFO] - from application in play-akka.actor.default-dispatcher-26 
+Start game with 1 categories.
+
+2015-05-20 19:10:12,202 - [ERROR] - from play in play-akka.actor.default-dispatcher-26 
+Cannot invoke the action, eventually got an error: java.lang.ClassCastException: models.JeopardyUser cannot be cast to models.Category
+
+2015-05-20 19:10:12,206 - [ERROR] - from application in play-akka.actor.default-dispatcher-26 
+
+
+! @6m80i2kgc - Internal server error, for (GET) [/jeopardy] ->
+
+play.api.Application$$anon$1: Execution exception[[ClassCastException: models.JeopardyUser cannot be cast to models.Category]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+Caused by: java.lang.ClassCastException: models.JeopardyUser cannot be cast to models.Category
+	at models.JeopardyGame.initializeQuestions(JeopardyGame.java:76) ~[classes/:na]
+	at models.JeopardyGame.<init>(JeopardyGame.java:40) ~[classes/:na]
+	at controllers.GameController.createNewGame(GameController.java:55) ~[classes/:2.3.8]
+	at controllers.GameController.createNewGame(GameController.java:38) ~[classes/:2.3.8]
+	at controllers.GameController.cachedGame(GameController.java:68) ~[classes/:2.3.8]
+	at controllers.GameController.playGame(GameController.java:94) ~[classes/:2.3.8]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.mvc.Security$AuthenticatedAction.call(Security.java:44) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:23) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:21) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.JPA.withTransactionAsync(JPA.java:180) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:18) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	... 6 common frames omitted
+
+2015-05-20 19:14:38,189 - [INFO] - from application in play-internal-execution-context-4 
+Application shutdown...
+
+2015-05-20 19:14:38,246 - [INFO] - from play in play-internal-execution-context-4 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:14:38,249 - [INFO] - from play in play-internal-execution-context-4 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:14:38,489 - [INFO] - from application in play-internal-execution-context-4 
+Data from: data.json
+
+2015-05-20 19:14:38,555 - [INFO] - from application in play-internal-execution-context-4 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:14:38,559 - [INFO] - from play in play-internal-execution-context-4 
+Application started (Dev)
+
+2015-05-20 19:14:38,587 - [INFO] - from application in play-akka.actor.default-dispatcher-28 
+[Dave] Play the game.
+
+2015-05-20 19:14:38,606 - [INFO] - from application in play-akka.actor.default-dispatcher-28 
+Go to login page.
+
+2015-05-20 19:14:40,270 - [INFO] - from application in play-akka.actor.default-dispatcher-28 
+Go to Registration page.
+
+2015-05-20 19:14:43,811 - [INFO] - from application in play-akka.actor.default-dispatcher-32 
+Registration info has been submitted.
+
+2015-05-20 19:14:43,829 - [INFO] - from application in play-akka.actor.default-dispatcher-33 
+Go to login page.
+
+2015-05-20 19:14:49,684 - [INFO] - from application in play-akka.actor.default-dispatcher-37 
+Login information has been provided.
+
+2015-05-20 19:14:49,730 - [INFO] - from application in play-akka.actor.default-dispatcher-37 
+[Dave] Play the game.
+
+2015-05-20 19:14:49,733 - [INFO] - from application in play-akka.actor.default-dispatcher-37 
+[Dave] Creating a new game.
+
+2015-05-20 19:14:49,740 - [ERROR] - from play in play-akka.actor.default-dispatcher-37 
+Cannot invoke the action, eventually got an error: java.lang.IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: models.Categoryu is not mapped [select u from models.Categoryu]
+
+2015-05-20 19:14:49,744 - [ERROR] - from application in play-akka.actor.default-dispatcher-37 
+
+
+! @6m80iif50 - Internal server error, for (GET) [/jeopardy] ->
+
+play.api.Application$$anon$1: Execution exception[[IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: models.Categoryu is not mapped [select u from models.Categoryu]]]
+	at play.api.Application$class.handleError(Application.scala:296) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.DefaultApplication.handleError(Application.scala:402) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3$$anonfun$applyOrElse$4.apply(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:320) [play_2.11-2.3.8.jar:2.3.8]
+	at play.core.server.netty.PlayDefaultUpstreamHandler$$anonfun$3.applyOrElse(PlayDefaultUpstreamHandler.scala:316) [play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32) [scala-library-2.11.1.jar:na]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.Promise$class.complete(Promise.scala:55) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:153) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:23) [scala-library-2.11.1.jar:na]
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41) [akka-actor_2.11-2.3.4.jar:na]
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393) [akka-actor_2.11-2.3.4.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107) [scala-library-2.11.1.jar:na]
+Caused by: java.lang.IllegalArgumentException: org.hibernate.hql.internal.ast.QuerySyntaxException: models.Categoryu is not mapped [select u from models.Categoryu]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1750) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1677) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1683) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:331) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	at models.JeopardyDAO.findEntities(JeopardyDAO.java:106) ~[classes/:na]
+	at controllers.GameController.createNewGame(GameController.java:47) ~[classes/:2.3.8]
+	at controllers.GameController.createNewGame(GameController.java:38) ~[classes/:2.3.8]
+	at controllers.GameController.cachedGame(GameController.java:68) ~[classes/:2.3.8]
+	at controllers.GameController.playGame(GameController.java:94) ~[classes/:2.3.8]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:191) ~[classes/:na]
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.GlobalSettings$1.call(GlobalSettings.java:67) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.mvc.Security$AuthenticatedAction.call(Security.java:44) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:23) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:21) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.JPA.withTransactionAsync(JPA.java:180) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:18) ~[play-java-jpa_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46) [play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$.apply(Future.scala:31) ~[scala-library-2.11.1.jar:na]
+	at scala.concurrent.Future$.apply(Future.scala:492) ~[scala-library-2.11.1.jar:na]
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at scala.Option.map(Option.scala:145) [scala-library-2.11.1.jar:na]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121) ~[play_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496) ~[play-iteratees_2.11-2.3.8.jar:2.3.8]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24) [scala-library-2.11.1.jar:na]
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24) [scala-library-2.11.1.jar:na]
+	... 6 common frames omitted
+Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: models.Categoryu is not mapped [select u from models.Categoryu]
+	at org.hibernate.hql.internal.ast.QuerySyntaxException.generateQueryException(QuerySyntaxException.java:96) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.QueryException.wrapWithQueryString(QueryException.java:120) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:234) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.compile(QueryTranslatorImpl.java:158) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:131) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.<init>(HQLQueryPlan.java:93) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.engine.query.spi.QueryPlanCache.getHQLQueryPlan(QueryPlanCache.java:167) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.internal.AbstractSessionImpl.getHQLQueryPlan(AbstractSessionImpl.java:301) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.internal.AbstractSessionImpl.createQuery(AbstractSessionImpl.java:236) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.internal.SessionImpl.createQuery(SessionImpl.java:1836) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.createQuery(AbstractEntityManagerImpl.java:328) ~[hibernate-entitymanager-4.3.9.Final.jar:4.3.9.Final]
+	... 49 common frames omitted
+Caused by: org.hibernate.hql.internal.ast.QuerySyntaxException: models.Categoryu is not mapped
+	at org.hibernate.hql.internal.ast.util.SessionFactoryHelper.requireClassPersister(SessionFactoryHelper.java:189) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.tree.FromElementFactory.addFromElement(FromElementFactory.java:109) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.tree.FromClause.addFromElement(FromClause.java:95) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.HqlSqlWalker.createFromElement(HqlSqlWalker.java:338) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromElement(HqlSqlBaseWalker.java:3678) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromElementList(HqlSqlBaseWalker.java:3567) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.fromClause(HqlSqlBaseWalker.java:708) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.query(HqlSqlBaseWalker.java:564) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.selectStatement(HqlSqlBaseWalker.java:301) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.antlr.HqlSqlBaseWalker.statement(HqlSqlBaseWalker.java:249) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:278) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:206) ~[hibernate-core-4.3.9.Final.jar:4.3.9.Final]
+	... 57 common frames omitted
+
+2015-05-20 19:17:46,205 - [INFO] - from application in play-internal-execution-context-4 
+Application shutdown...
+
+2015-05-20 19:17:46,263 - [INFO] - from play in play-internal-execution-context-4 
+datasource [jdbc:h2:mem:play;DB_CLOSE_DELAY=-1] bound to JNDI as DefaultDS
+
+2015-05-20 19:17:46,265 - [INFO] - from play in play-internal-execution-context-4 
+database [default] connected at jdbc:h2:mem:play
+
+2015-05-20 19:17:46,480 - [INFO] - from application in play-internal-execution-context-4 
+Data from: data.json
+
+2015-05-20 19:17:46,538 - [INFO] - from application in play-internal-execution-context-4 
+5 categories from json file 'data.json' inserted.
+
+2015-05-20 19:17:46,542 - [INFO] - from play in play-internal-execution-context-4 
+Application started (Dev)
+
+2015-05-20 19:17:46,569 - [INFO] - from application in play-akka.actor.default-dispatcher-32 
+[Dave] Play the game.
+
+2015-05-20 19:17:46,586 - [INFO] - from application in play-akka.actor.default-dispatcher-39 
+Go to login page.
+
+2015-05-20 19:17:50,354 - [INFO] - from application in play-akka.actor.default-dispatcher-39 
+Login information has been provided.
+
+2015-05-20 19:17:51,679 - [INFO] - from application in play-akka.actor.default-dispatcher-42 
+Go to Registration page.
+
+2015-05-20 19:17:54,807 - [INFO] - from application in play-akka.actor.default-dispatcher-42 
+Registration info has been submitted.
+
+2015-05-20 19:17:54,832 - [INFO] - from application in play-akka.actor.default-dispatcher-42 
+Go to login page.
+
+2015-05-20 19:17:58,215 - [INFO] - from application in play-akka.actor.default-dispatcher-45 
+Login information has been provided.
+
+2015-05-20 19:17:58,235 - [INFO] - from application in play-akka.actor.default-dispatcher-41 
+[Dave] Play the game.
+
+2015-05-20 19:17:58,237 - [INFO] - from application in play-akka.actor.default-dispatcher-41 
+[Dave] Creating a new game.
+
+2015-05-20 19:17:58,241 - [INFO] - from application in play-akka.actor.default-dispatcher-41 
+Start game with 5 categories.
+
+2015-05-20 19:18:04,222 - [INFO] - from application in play-akka.actor.default-dispatcher-47 
+[Dave] Questions selected.
+
+2015-05-20 19:18:05,999 - [INFO] - from application in play-akka.actor.default-dispatcher-32 
+[Dave] Answers submitted.
+
