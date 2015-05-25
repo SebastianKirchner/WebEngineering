@@ -1,6 +1,6 @@
-// @SOURCE:E:/IntelliJProjects/WebEngineeringMaven/ue4/we15-lab4/conf/routes
-// @HASH:5b94c92980d44ac4b7c76026e9490186fd1fd49f
-// @DATE:Wed May 20 18:36:38 CEST 2015
+// @SOURCE:C:/Users/Maks/Documents/we/WebEngineering/ue4/we15-lab4/conf/routes
+// @HASH:331cfae7aa41dc6f34b9f0186deb3a25b0b719a3
+// @DATE:Mon May 25 19:02:30 CEST 2015
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._

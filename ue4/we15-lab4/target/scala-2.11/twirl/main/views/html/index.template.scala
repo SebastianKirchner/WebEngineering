@@ -38,8 +38,8 @@ Seq[Any]()}
 }
               /*
                   -- GENERATED --
-                  DATE: Wed May 20 18:36:38 CEST 2015
-                  SOURCE: E:/IntelliJProjects/WebEngineeringMaven/ue4/we15-lab4/app/views/index.scala.html
+                  DATE: Mon May 25 19:03:11 CEST 2015
+                  SOURCE: C:/Users/Maks/Documents/we/WebEngineering/ue4/we15-lab4/app/views/index.scala.html
                   HASH: 66b241d4daa4592a94909d15c3d366d3f5903ab6
                   MATRIX: 
                   LINES: 

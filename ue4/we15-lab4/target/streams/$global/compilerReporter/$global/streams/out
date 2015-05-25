@@ -1,2 +1,4 @@
-[info] E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\app\models\JeopardyDAO.java: E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\app\models\JeopardyDAO.java uses unchecked or unsafe operations.
-[info] E:\IntelliJProjects\WebEngineeringMaven\ue4\we15-lab4\app\models\JeopardyDAO.java: Recompile with -Xlint:unchecked for details.
+[error] C:\Users\Maks\Documents\we\WebEngineering\ue4\we15-lab4\app\highscore\HighscoreService.java:98: cannot find symbol
+[error]   symbol:   variable envelope
+[error]   location: class highscore.HighscoreService
+[error] envelope

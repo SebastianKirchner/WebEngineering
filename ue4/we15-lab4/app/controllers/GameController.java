@@ -6,6 +6,8 @@ import models.Category;
 import models.JeopardyDAO;
 import models.JeopardyGame;
 import models.JeopardyUser;
+import highscore.*;
+import twitter.*;
 import play.Logger;
 import play.cache.Cache;
 import play.data.DynamicForm;
@@ -154,100 +156,56 @@ public class GameController extends Controller {
 		JeopardyGame game = cachedGame(request().username());
 		if(game == null || !game.isGameOver())
 			return redirect(routes.GameController.playGame());
-		
+
 		Logger.info("[" + request().username() + "] Game over.");
-        Logger.info("Data being transmitted to Highscore-Service");
-        try {
+		
+		//High Score:
+        Logger.info("Start Highscore-Service");
+		boolean highscoreWasSuccessfull;
+		String UUID = "";
+		try {
+			HighscoreService highscoreService = new HighscoreService();
+			UUID = highscoreService.postToBoard(game);
+			Logger.info("Highscore post successfull!");
+			Logger.info("--> UUID = " + UUID);
+			highscoreWasSuccessfull = true;
+		} catch(HighscoreException e) {
+			Logger.error(e.getMessage());
+			highscoreWasSuccessfull = false;
+		}
+
+		//Twitter:
+		Logger.info("Start Twitter");
+		boolean twitterWasSuccessfull;
+		TwitterStatusMessage twitterStatusMessage = new TwitterStatusMessage(game.getLeader().getUser().getName(), UUID, new Date());
+		try {
+			twitterStatusMessage.postToTwitter();
+			Logger.info("Twitter post successfull!");
+			twitterWasSuccessfull = true;
+		} catch(TwitterException e) {
+			Logger.error("Twitter post failed!");
+			twitterWasSuccessfull = false;
+		}
+
+		//Message to user:
+		if(highscoreWasSuccessfull && twitterWasSuccessfull) {
+			System.out.println("UUID " + UUID + " wurde auf Twitter veröffentlicht");
+		}
+
+		/*
+		try {
             SOAPConnectionFactory connFac = SOAPConnectionFactory.newInstance();
             SOAPConnection conn = connFac.createConnection();
 
             String url = "http://playground.big.tuwien.ac.at:8080/highscoreservice/PublishHighScoreService?wsdl";
             //String url = "";
-            SOAPMessage soapmsg = conn.call(createSOAPMessage(game),url);
-
-        } catch (SOAPException e){
+            SOAPMessage soapmsg = conn.call(createSOAPMessage(game),url);} catch (SOAPException e){
             Logger.error(e.getMessage());
         }
+        */
+
+
 
 		return ok(winner.render(game));
 	}
-
-    public static SOAPMessage createSOAPMessage(JeopardyGame game) throws SOAPException{
-        MessageFactory messageFactory = MessageFactory.newInstance();
-        SOAPMessage soapMessage = messageFactory.createMessage();
-        SOAPPart soapPart = soapMessage.getSOAPPart();
-
-        String serverURI = "http://playground.big.tuwien.ac.at:8080/highscoreservice/";
-
-        // SOAP Envelope
-        SOAPEnvelope envelope = soapPart.getEnvelope();
-        envelope.addNamespaceDeclaration("data", serverURI);
-
-        /*
-        * <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:data="http://big.tuwien.ac.at/we/highscore/data">
-        <soapenv:Header/>
-            <soapenv:Body>
-                <data:HighScoreRequest>
-                    <data:UserKey>3ke93-gue34-dkeu9</data:UserKey>
-                    <data:UserData>
-                        <Loser Gender="male" BirthDate="1990-01-12">
-                            <FirstName>Hans</FirstName>
-                            <LastName>Mustermann</LastName>
-                            <Password></Password>
-                            <Points>12</Points>
-                        </Loser>
-                        <Winner Gender="female" BirthDate="1981-01-12">
-                            <FirstName>Gerda</FirstName>
-                            <LastName>Haydn</LastName>
-                            <Password></Password>
-                            <Points>12</Points>
-                        </Winner>
-                    </data:UserData>
-                </data:HighScoreRequest>
-            </soapenv:Body>
-        </soapenv:Envelope>
-        * */
-
-        SOAPBody soapBody = envelope.getBody();
-
-
-
-        SOAPElement highscorerequestElem = soapBody.addChildElement("HighScoreRequest","data");
-        SOAPElement userkeyElem = highscorerequestElem.addChildElement("UserKey", "data");
-        userkeyElem.addTextNode("3ke93-gue34-dkeu9");
-
-        SOAPElement userDataElem = highscorerequestElem.addChildElement("UserData", "data");
-        SOAPElement loserElem = userDataElem.addChildElement("Loser");
-        SOAPElement winnerElem = userDataElem.addChildElement("Winner");
-
-        JeopardyUser loser = game.getLoser().getUser();
-        String loserBirthdate  = loser.getBirthDate() == null ? "" : loser.getBirthDate().toString();
-        loser.setFirstName(loser.getFirstName() == null ? "" : loser.getFirstName());
-        loser.setLastName(loser.getLastName() == null ? "" : loser.getLastName());
-
-        JeopardyUser winner = game.getWinner().getUser();
-        String winnerBirthdate  = winner.getBirthDate() == null ? "" : winner.getBirthDate().toString();
-        winner.setFirstName(winner.getFirstName() == null ? "" : winner.getFirstName());
-        winner.setLastName(winner.getLastName() == null ? "" : winner.getLastName());
-
-        loserElem.addAttribute(new QName("Gender"),loser.getGender().name());
-        loserElem.addAttribute(new QName("BirthDate"),loserBirthdate);
-        SOAPElement loserFirstname = loserElem.addChildElement("FirstName").addTextNode(loser.getFirstName());
-        SOAPElement loserLastName = loserElem.addChildElement("LastName").addTextNode(loser.getLastName());
-        SOAPElement loserPassword = loserElem.addChildElement("Password").addTextNode("");
-        SOAPElement loserPoints = loserElem.addChildElement("Points").addTextNode(Integer.toString(game.getLoser().getProfit()));
-
-        winnerElem.addAttribute(new QName("Gender"),winner.getGender().name());
-        winnerElem.addAttribute(new QName("BirthDate"),winnerBirthdate);
-        SOAPElement winnerFirstname = winnerElem.addChildElement("FirstName").addTextNode(winner.getFirstName());
-        SOAPElement winnerLastName = winnerElem.addChildElement("LastName").addTextNode(winner.getLastName());
-        SOAPElement winnerPassword = winnerElem.addChildElement("Password").addTextNode("");
-        SOAPElement winnerPoints = winnerElem.addChildElement("Points").addTextNode(Integer.toString(game.getWinner().getProfit()));
-
-        MimeHeaders headers = soapMessage.getMimeHeaders();
-
-        Logger.info(soapMessage.toString());
-        return soapMessage;
-    }
-
 }
