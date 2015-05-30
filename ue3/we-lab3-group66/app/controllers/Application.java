@@ -114,27 +114,35 @@ public class Application extends Controller {
         u.setAvatar(Avatar.getAvatar(requestData.get("avatar")));
         u.setBirthdate(requestData.get("birthdate"));
 
+        //Geburtsdatum vorbereiten
+        u.setBirthdate(u.getBirthdate().replace('-','.'));
+        if(u.getBirthdate().substring(0,4).matches("^([0-9]{4})")){
+            String year = u.getBirthdate().substring(0,4);
+            String month = u.getBirthdate().substring(5,7);
+            String day = u.getBirthdate().substring(8,10);
+            u.setBirthdate(day + "." + month + "." + year);
+        }
+
+
         Loginuser sameUser = JPA.em().find(Loginuser.class,u.getUsername());
         boolean usernameValid = u.getUsername().length()>=4 && u.getUsername().length()<=8;
         boolean passwordValid = u.getPassword().length()>=4 && u.getPassword().length()<=8;
         boolean userExistsValid  = sameUser == null;
-        boolean birthdateValid  = true;
+        boolean birthdateValid  = false;
 
 
-        if(!(u.getBirthdate() == null || u.getBirthdate().length()==0)) {
-
-            if (u.getBirthdate().matches("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$.")) {
+        if(u.getBirthdate() != null || u.getBirthdate().length()>0) {
+            if (u.getBirthdate().matches("^([0][1-9]|([1|2][0-9])|[3][0-1]).([0][1-9]|[1][0-2]).[0-9]{4}")) {
                 birthdateValid = true;
             }
         }
-        //return ok(Test.render(u.getBirthdate(),u.getBirthdate().matches("/^([0][1-9]|[1|2][0-9]|[3][0|1])[.]([0][1-9]|[1][0-2])[.]([0-9]{4})$/")));
 
-        if(!(usernameValid && passwordValid && birthdateValid && userExistsValid)){
-            return ok(registration.render(usernameValid, passwordValid, birthdateValid, userExistsValid));
-        } else{
+        if(usernameValid && passwordValid && birthdateValid && userExistsValid){
             Loginuser.saveLoginuser(u);
-
             return ok(authentication.render(""));
+
+        } else{
+            return ok(registration.render(usernameValid, passwordValid, birthdateValid, userExistsValid));
         }
     }
 
