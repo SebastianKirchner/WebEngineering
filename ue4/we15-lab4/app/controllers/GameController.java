@@ -166,8 +166,8 @@ public class GameController extends Controller {
 		try {
 			HighscoreService highscoreService = new HighscoreService();
 			UUID = highscoreService.postToBoard(game);
-			Logger.info("Highscore post successfull!");
-			Logger.info("--> UUID = " + UUID);
+			play.Logger.info("Highscore post successfull!");
+			play.Logger.info("--> UUID = " + UUID);
 			highscoreWasSuccessfull = true;
 		} catch(HighscoreException e) {
 			Logger.error(e.getMessage());
