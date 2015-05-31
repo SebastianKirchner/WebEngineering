@@ -178,11 +178,12 @@ public class GameController extends Controller {
 		Logger.info("Start Twitter");
 		boolean twitterWasSuccessfull;
 		TwitterStatusMessage twitterStatusMessage = new TwitterStatusMessage(game.getLeader().getUser().getName(), UUID, new Date());
+		TwitterClientImpl twitterClientImpl = new TwitterClientImpl();
 		try {
-			twitterStatusMessage.postToTwitter();
+			twitterClientImpl.publishUuid(twitterStatusMessage);
 			Logger.info("Twitter post successfull!");
 			twitterWasSuccessfull = true;
-		} catch(TwitterException e) {
+		} catch(Exception e) {
 			Logger.error("Twitter post failed!");
 			twitterWasSuccessfull = false;
 		}
