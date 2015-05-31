@@ -100,7 +100,7 @@ public class GameController extends Controller {
 			return ok(question.render(game));
 		} else if(game.isGameOver()) {
 			Logger.info("[" + request().username() + "] Game over... redirect");
-			return ok(winner.render(game));
+			return ok(winner.render(game,""));
 		}			
 		return ok(jeopardy.render(game));
 	}
@@ -207,6 +207,6 @@ public class GameController extends Controller {
 
 
 
-		return ok(winner.render(game));
+		return ok(winner.render(game,UUID));
 	}
 }
