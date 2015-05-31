@@ -134,6 +134,7 @@ public class Global extends GlobalSettings {
                 .setLimit(5) // at most five statements
                 .addWhereClause(RDF.type, DBPediaOWL.Actor)
                 .addPredicateExistsClause(FOAF.name)
+                .addPredicateExistsClause(DBPediaOWL.deathDate)
                 .addFilterClause(RDFS.label, Locale.GERMAN)
                 .addFilterClause(RDFS.label, Locale.ENGLISH)
                 .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.GREATER_OR_EQUAL);
@@ -145,6 +146,7 @@ public class Global extends GlobalSettings {
                 .setLimit(5) // at most five statements
                 .addWhereClause(RDF.type, DBPediaOWL.Actor)
                 .addPredicateExistsClause(FOAF.name)
+                .addPredicateExistsClause(DBPediaOWL.deathDate)
                 .addFilterClause(RDFS.label, Locale.GERMAN)
                 .addFilterClause(RDFS.label, Locale.ENGLISH)
                 .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.LESS);
@@ -262,14 +264,11 @@ public class Global extends GlobalSettings {
         Model maleActorWithOscar = DBPediaService.loadStatements(maleOscarQuery.toQueryString());
         Model maleActorNoOscar = DBPediaService.loadStatements(maleNoOscarQuery.toQueryString());
 
-        q5.setTextDE("Welche dieser Schauspieler hat mindestens einen Oscar gewonnen?");
+        q5.setTextDE("Welcher dieser Schauspieler hat mindestens einen Oscar gewonnen?");
         q5.setTextEN("Which of the following actors has won an oscar?");
         q5.setValue(20);
         c.addQuestion(createQuestion(q5, maleActorWithOscar, maleActorNoOscar));
-
-        c.addQuestion(q5);
-
-
+        
         return c;
     }
 
@@ -297,6 +296,10 @@ public class Global extends GlobalSettings {
         // 2 - 4 correct answers or if less all correct answers
         Integer right = Math.min(new Random().nextInt(2) + 2, correctEN.size());
 
+        if (right == 0 || incorrect.size() == 0) {
+            return q;
+        }
+
         for (int i = 0; i <right; ++i) {
             Answer a = new Answer();
             a.setTextDE(correctDE.get(i));
@@ -318,9 +321,44 @@ public class Global extends GlobalSettings {
         return q;
     }
 
-
     public void onStop(Application app) {
         Logger.info("Application shutdown...");
     }
+
+
+    /* COULD NOT TEST CAUSE UNDER MAINTENANCE
+
+    Question q5 = new Question();
+
+        Resource harvardAlumni = DBPediaService.loadStatements(DBPedia.createResource("Category:Harvard_University_alumni"));
+
+        // build SPARQL-query
+        SelectQueryBuilder actorHarvardAlumniQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
+                .addWhereClause(DCTerms.subject, DBPedia.createResource("Category:Harvard_University_alumni"));
+
+        // retrieve data from dbpedia
+        Model actorHarvardAlumni = DBPediaService.loadStatements(actorHarvardAlumniQuery.toQueryString());
+
+        // build SPARQL-query
+        SelectQueryBuilder actorNotHarvardAlumniQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addMinusClause(DCTerms.subject, DBPedia.createResource("Category:Harvard_University_alumni"))
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH);
+
+        // retrieve data from dbpedia
+        Model actorNotHarvardAlumni = DBPediaService.loadStatements(actorNotHarvardAlumniQuery.toQueryString());
+
+        q5.setTextDE("Welche/r der folgende SchauspielerInnen hat einen Abschluss der Haravard University?");
+        q5.setTextEN("Which of the following actors/actresses is a Harvard University Alumni?");
+        q5.setValue(50);
+     */
 
 }

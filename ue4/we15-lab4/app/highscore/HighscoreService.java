@@ -5,7 +5,6 @@ import models.JeopardyUser;
 
 import javax.xml.namespace.QName;
 import javax.xml.soap.*;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
@@ -47,14 +46,6 @@ public class HighscoreService {
             SOAPBody soapBody = soapEnv.getBody();
 
             fillBody(soapBody, game);
-
-            try {
-                System.out.println("SOAP Message:");
-                soapMessage.writeTo(System.out);
-                System.out.flush();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
 
             SOAPMessage response = soapConnection.call(soapMessage, highscoreURL);
 
