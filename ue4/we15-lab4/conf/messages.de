@@ -99,4 +99,3 @@ jeopardy.answer=antworten
 
 twitter.uuid = UUID
 twitter.success = wurde auf Twitter veröffentlicht
-twitter.fail = konnte leider nicht auf Twitter veröffentlicht werden

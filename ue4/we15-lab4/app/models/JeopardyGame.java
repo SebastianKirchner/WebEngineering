@@ -21,7 +21,7 @@ import models.JeopardyUser.Gender;
 
 
 public class JeopardyGame {	
-	private static final int NUM_QUESTIONS = 1;
+	private static final int NUM_QUESTIONS = 5;
 
 	private Random random = new Random();
 	
@@ -64,7 +64,7 @@ public class JeopardyGame {
 		user.setAvatar(Avatar.getOpponent(getHumanPlayer().getUser().getAvatar()));
 		user.setName(user.getAvatar().getName());
 		user.setFirstName("Marvin");
-		user.setLastName("ParanoidAndroid");
+		user.setLastName("SeMaDa");
 		user.setGender(Gender.male);
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(1979, 1, 1);

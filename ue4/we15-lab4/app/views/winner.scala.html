@@ -9,7 +9,7 @@
          <section id="newgame" aria-labelledby="newgameheading">
              <h2 id="newgameheading" class="accessibility">@Messages.get("quizover.newgame")</h2>
              @helper.form(routes.GameController.newGame()) {
-                 <h2>UUID: @uuid</h2>
+                 <h2>@Messages.get("twitter.uuid") @uuid @Messages.get("twitter.success")</h2>
              <input name="newgame" id="new_game" class="orangelink contentlink" type="submit" value="@Messages.get("quizover.newgame")" />
              }
 <!--          	 <a class="orangelink contentlink" id="new_game" href="@routes.GameController.newGame()">@Messages.get("quizover.newgame")</a>
