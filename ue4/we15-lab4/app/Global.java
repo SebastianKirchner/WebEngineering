@@ -5,6 +5,7 @@ import at.ac.tuwien.big.we.dbpedia.vocabulary.DBPediaOWL;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import data.JSONDataInserter;
@@ -120,7 +121,7 @@ public class Global extends GlobalSettings {
         SECOND QUESTION
 
         Actors that died after 2000
-		 */
+        */
         Question q2 = new Question();
 
         Calendar year2000 = Calendar.getInstance();
@@ -201,6 +202,35 @@ public class Global extends GlobalSettings {
 		 */
         Question q4 = new Question();
 
+        Resource femaleOscars = DBPediaService.loadStatements(DBPedia.createResource("Category:Best_Actress_Academy_Award_winners"));
+
+        // build SPARQL-query
+        SelectQueryBuilder femaleOscarQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addPredicateExistsClause(FOAF.name)
+                .addWhereClause(DCTerms.subject, femaleOscars)
+                .addWhereClause(DCTerms.subject, DBPedia.createResource("Category:American_film_actresses"))
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH);
+
+        SelectQueryBuilder femaleNoOscarQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(DCTerms.subject, DBPedia.createResource("Category:American_film_actresses"))
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
+                .addMinusClause(DCTerms.subject, femaleOscars);
+
+
+        // retrieve data from dbpedia
+        Model femaleActorWithOscar = DBPediaService.loadStatements(femaleOscarQuery.toQueryString());
+        Model femaleActorNoOscar = DBPediaService.loadStatements(femaleNoOscarQuery.toQueryString());
+
+        q4.setTextDE("Welche dieser SchauspielerInnen hat keinen Oscar gewonnen?");
+        q4.setTextEN("Which of the following actresses hasn't won an oscar?");
+        q4.setValue(10);
+        c.addQuestion(createQuestion(q4, femaleActorNoOscar, femaleActorWithOscar));
+
         c.addQuestion(q4);
 
 
@@ -208,7 +238,34 @@ public class Global extends GlobalSettings {
 		FIFTH QUESTION
 		 */
         Question q5 = new Question();
-        // TODO query
+
+        Resource maleOscars = DBPediaService.loadStatements(DBPedia.createResource("Category:Best_Actor_Academy_Award_winners"));
+
+        // build SPARQL-query
+        SelectQueryBuilder maleOscarQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addPredicateExistsClause(FOAF.name)
+                .addWhereClause(DCTerms.subject, maleOscars)
+                .addWhereClause(DCTerms.subject, DBPedia.createResource("Category:American_male_film_actors"))
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH);
+
+        SelectQueryBuilder maleNoOscarQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(DCTerms.subject, DBPedia.createResource("Category:American_male_film_actors"))
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
+                .addMinusClause(DCTerms.subject, maleOscars);
+
+        // retrieve data from dbpedia
+        Model maleActorWithOscar = DBPediaService.loadStatements(maleOscarQuery.toQueryString());
+        Model maleActorNoOscar = DBPediaService.loadStatements(maleNoOscarQuery.toQueryString());
+
+        q5.setTextDE("Welche dieser Schauspieler hat mindestens einen Oscar gewonnen?");
+        q5.setTextEN("Which of the following actors has won an oscar?");
+        q5.setValue(20);
+        c.addQuestion(createQuestion(q5, maleActorWithOscar, maleActorNoOscar));
 
         c.addQuestion(q5);
 
