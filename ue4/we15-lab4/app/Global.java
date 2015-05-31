@@ -45,8 +45,7 @@ public class Global extends GlobalSettings {
                 @Override
                 public Boolean apply() throws Throwable {
                     insertJSonData();
-
-                    //insertDBPediaData(); TODO -> UNCOMMENT ME
+                    insertDBPediaData();
                     return true;
                 }
 
@@ -77,7 +76,7 @@ public class Global extends GlobalSettings {
         c.setName("Film und Kino", "DE");
         c.setName("Movies", "EN");
 
-		/*
+				/*
         FIRST QUESTION
 
         Example Question with Johnny Depp and Tim Burton
@@ -92,12 +91,6 @@ public class Global extends GlobalSettings {
         // Load all statements as we need to get the name later
         Resource actor = DBPediaService.loadStatements(DBPedia.createResource("Johnny_Depp"));
 
-        // retrieve english and german names, might be used for question text
-        String englishDirectorName = DBPediaService.getResourceName(director, Locale.ENGLISH);
-        String germanDirectorName = DBPediaService.getResourceName(director, Locale.GERMAN);
-        String englishActorName = DBPediaService.getResourceName(actor, Locale.ENGLISH);
-        String germanActorName = DBPediaService.getResourceName(actor, Locale.GERMAN);
-
         // build SPARQL-query
         SelectQueryBuilder movieQuery = DBPediaService.createQueryBuilder()
                 .setLimit(5) // at most five statements
@@ -110,12 +103,6 @@ public class Global extends GlobalSettings {
         // retrieve data from dbpedia
         Model timBurtonMovies = DBPediaService.loadStatements(movieQuery.toQueryString());
 
-        // get english and german movie names, e.g., for right choices
-        List<String> englishTimBurtonMovieNames =
-                DBPediaService.getResourceNames(timBurtonMovies, Locale.ENGLISH);
-        List<String> germanTimBurtonMovieNames =
-                DBPediaService.getResourceNames(timBurtonMovies, Locale.GERMAN);
-
         // alter query to get movies without tim burton
         movieQuery.removeWhereClause(DBPediaOWL.director, director);
         movieQuery.addMinusClause(DBPediaOWL.director, director);
@@ -123,15 +110,8 @@ public class Global extends GlobalSettings {
         // retrieve data from dbpedia
         Model noTimBurtonMovies = DBPediaService.loadStatements(movieQuery.toQueryString());
 
-        // get english and german movie names, e.g., for wrong choices
-        List<String> englishNoTimBurtonMovieNames =
-                DBPediaService.getResourceNames(noTimBurtonMovies, Locale.ENGLISH);
-        List<String> germanNoTimBurtonMovieNames =
-                DBPediaService.getResourceNames(noTimBurtonMovies, Locale.GERMAN);
-
-
-        q1.setTextDE("In welchen der folgenden Filme mit %s hat %s Regie geführt?");
-        q1.setTextEN("On which of the following movies starring Johnny Depp did Tim Burton act as a director?");
+        q1.setTextDE("In welchen der folgenden Filme hat Tim Burton Regie gefuehrt?");
+        q1.setTextEN("On which of the following movies did Tim Burton act as a director?");
         q1.setValue(10);
         c.addQuestion(createQuestion(q1, timBurtonMovies, noTimBurtonMovies));
 
@@ -153,6 +133,8 @@ public class Global extends GlobalSettings {
                 .setLimit(5) // at most five statements
                 .addWhereClause(RDF.type, DBPediaOWL.Actor)
                 .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
                 .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.GREATER_OR_EQUAL);
 
         // retrieve data from dbpedia
@@ -162,31 +144,62 @@ public class Global extends GlobalSettings {
                 .setLimit(5) // at most five statements
                 .addWhereClause(RDF.type, DBPediaOWL.Actor)
                 .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
                 .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.LESS);
 
         // retrieve data from dbpedia
         Model deadBefore2000 = DBPediaService.loadStatements(deadActorsBefore2000.toQueryString());
 
-        q1.setTextDE("Welche der folgenden SchauspielerInnen sind nach dem Jahr 2000 verstorben?");
-        q1.setTextEN("Which of the following actors/actresses passed away after the year 2000?");
-        q1.setValue(20);
+        q2.setTextDE("Welche der folgenden SchauspielerInnen sind nach dem Jahr 2000 verstorben?");
+        q2.setTextEN("Which of the following actors/actresses passed away after the year 2000?");
+        q2.setValue(20);
         c.addQuestion(createQuestion(q2, deadAfter2000, deadBefore2000));
 
 
 		/*
-		THIRD QUESTION
+        THIRD QUESTION
+
+        Which actors were born in the UK
 		 */
         Question q3 = new Question();
-        // TODO query
 
-        c.addQuestion(q3);
+        Resource uk = DBPediaService.loadStatements(DBPedia.createResource("United_Kingdom"));
+
+        // build SPARQL-query
+        SelectQueryBuilder bornUKQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
+                .addWhereClause(DBPediaOWL.birthPlace, uk);
+
+        // retrieve data from dbpedia
+        Model bornUK = DBPediaService.loadStatements(bornUKQuery.toQueryString());
+
+        // build SPARQL-query
+        SelectQueryBuilder notBornUKQuery = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(RDFS.label, Locale.GERMAN)
+                .addFilterClause(RDFS.label, Locale.ENGLISH)
+                .addMinusClause(DBPediaOWL.birthPlace, uk);
+
+        // retrieve data from dbpedia
+        Model notBornUK = DBPediaService.loadStatements(notBornUKQuery.toQueryString());
+
+        q3.setTextDE("Welche/r der folgende SchauspielerInnen wurde in England geboren?");
+        q3.setTextEN("Which of the following actors/actresses was born in the UK?");
+        q3.setValue(40);
+        c.addQuestion(createQuestion(q3, bornUK, notBornUK));
 
 
 		/*
 		FOURTH QUESTION
 		 */
         Question q4 = new Question();
-        // TODO query
 
         c.addQuestion(q4);
 
@@ -212,18 +225,26 @@ public class Global extends GlobalSettings {
      * @return Questino Object with right and wrong answers set
      */
     private static Question createQuestion(Question q, Model correct, Model incorrect) {
+        System.out.println(q.getTextDE());
+
         List<String> correctEN = DBPediaService.getResourceNames(correct, Locale.ENGLISH);
+        System.out.println("correctEN: " + correctEN.size());
         List<String> correctDE = DBPediaService.getResourceNames(correct, Locale.GERMAN);
+        System.out.println("correctDE: " + correctDE.size());
+
         List<String> incorrectEN = DBPediaService.getResourceNames(incorrect, Locale.ENGLISH);
+        System.out.println("incorrectEN: " + incorrectEN.size());
         List<String> incorrectDE = DBPediaService.getResourceNames(incorrect, Locale.GERMAN);
+        System.out.println("incorrectDE: " + incorrectDE.size());
 
         // 2 - 4 correct answers or if less all correct answers
-        Integer right = Math.min(new Random().nextInt(3) + 2, correctEN.size());
+        Integer right = Math.min(new Random().nextInt(2) + 2, correctEN.size());
 
         for (int i = 0; i <right; ++i) {
             Answer a = new Answer();
             a.setTextDE(correctDE.get(i));
             a.setTextEN(correctEN.get(i));
+            System.out.println("correct: " + correctDE.get(i));
 
             q.addRightAnswer(a);
         }
@@ -232,6 +253,7 @@ public class Global extends GlobalSettings {
             Answer a = new Answer();
             a.setTextDE(incorrectDE.get(i));
             a.setTextEN(incorrectEN.get(i));
+            System.out.println("incorrect: " + incorrectDE.get(i));
 
             q.addWrongAnswer(a);
         }
