@@ -21,8 +21,10 @@ import play.libs.F.Function0;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class Global extends GlobalSettings {
 
@@ -71,12 +73,14 @@ public class Global extends GlobalSettings {
     private static Category categoryFromDBPedia() {
 
         Category c = new Category();
-        // TODO choose category
-        c.setName("Kultur", "DE");
-        c.setName("Culture", "EN");
+
+        c.setName("Film und Kino", "DE");
+        c.setName("Movies", "EN");
 
 		/*
         FIRST QUESTION
+
+        Example Question with Johnny Depp and Tim Burton
 		 */
         Question q1 = new Question();
 
@@ -126,19 +130,47 @@ public class Global extends GlobalSettings {
                 DBPediaService.getResourceNames(noTimBurtonMovies, Locale.GERMAN);
 
 
-        q1.setTextDE("In diesem Film hat Johnny Depp mitgespielt und Tim Burton war der " + director + ".");
-        q1.setTextEN("Johnny Depp played a role in this movie, where the " + director + " was Tim Burton.");
+        q1.setTextDE("In welchen der folgenden Filme mit %s hat %s Regie geführt?");
+        q1.setTextEN("On which of the following movies starring Johnny Depp did Tim Burton act as a director?");
         q1.setValue(10);
         c.addQuestion(createQuestion(q1, timBurtonMovies, noTimBurtonMovies));
 
 
 		/*
         SECOND QUESTION
+
+        Actors that died after 2000
 		 */
         Question q2 = new Question();
-        // TODO query
 
-        c.addQuestion(q2);
+        Calendar year2000 = Calendar.getInstance();
+        year2000.set(Calendar.YEAR, 2000);
+        year2000.set(Calendar.MONTH, 1);
+        year2000.set(Calendar.DAY_OF_YEAR, 1);
+
+        // build SPARQL-query
+        SelectQueryBuilder deadActorsAfter2000 = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.GREATER_OR_EQUAL);
+
+        // retrieve data from dbpedia
+        Model deadAfter2000 = DBPediaService.loadStatements(deadActorsAfter2000.toQueryString());
+
+        SelectQueryBuilder deadActorsBefore2000 = DBPediaService.createQueryBuilder()
+                .setLimit(5) // at most five statements
+                .addWhereClause(RDF.type, DBPediaOWL.Actor)
+                .addPredicateExistsClause(FOAF.name)
+                .addFilterClause(DBPediaOWL.deathDate, year2000, SelectQueryBuilder.MatchOperation.LESS);
+
+        // retrieve data from dbpedia
+        Model deadBefore2000 = DBPediaService.loadStatements(deadActorsBefore2000.toQueryString());
+
+        q1.setTextDE("Welche der folgenden SchauspielerInnen sind nach dem Jahr 2000 verstorben?");
+        q1.setTextEN("Which of the following actors/actresses passed away after the year 2000?");
+        q1.setValue(20);
+        c.addQuestion(createQuestion(q2, deadAfter2000, deadBefore2000));
 
 
 		/*
@@ -185,7 +217,10 @@ public class Global extends GlobalSettings {
         List<String> incorrectEN = DBPediaService.getResourceNames(incorrect, Locale.ENGLISH);
         List<String> incorrectDE = DBPediaService.getResourceNames(incorrect, Locale.GERMAN);
 
-        for (int i = 0; i < correctDE.size(); ++i) {
+        // 2 - 4 correct answers or if less all correct answers
+        Integer right = Math.min(new Random().nextInt(3) + 2, correctEN.size());
+
+        for (int i = 0; i <right; ++i) {
             Answer a = new Answer();
             a.setTextDE(correctDE.get(i));
             a.setTextEN(correctEN.get(i));
@@ -193,7 +228,7 @@ public class Global extends GlobalSettings {
             q.addRightAnswer(a);
         }
 
-        for (int i = 0; i < incorrectDE.size(); ++i) {
+        for (int i = 0; i < 5-right; ++i) {
             Answer a = new Answer();
             a.setTextDE(incorrectDE.get(i));
             a.setTextEN(incorrectEN.get(i));
